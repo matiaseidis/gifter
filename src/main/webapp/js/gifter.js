@@ -34,13 +34,13 @@ $(function() {
 							$('#' + item.id + " .rateBox").append(button("yes-" + item.id, "rateBoxElem", "ok"))
 							$(".rateBox button#"+"yes-" + item.id).on("click", function(e) {
 								e.preventDefault()
-								updateRate(e, index, true)
+								updateRate(e, item.id, index, true)
 							});
 
 							$('#' + item.id + " .rateBox").append(button("no-" + item.id, "rateBoxElem", "remove"))
 							$(".rateBox button#"+"no-" + item.id).on("click", function(e) {
 								e.preventDefault()
-								updateRate(e, index, false)
+								updateRate(e, item.id, index, false)
 							});
 						});
 					}, dataType: "json"
@@ -52,13 +52,19 @@ $(function() {
 
 			start(JSON.stringify({scores : []}));
 			
-			updateRate = function(event, index, score) {
-				toRate.splice(toRate.indexOf(index),1);
+			updateRate = function(event, itemId, index, score) {
+
+				if ( $.inArray(index, toRate) > -1) {
+					toRate.splice(toRate.indexOf(index),1);
+				}
 				message[index].userScore=score
-//				console.log($(event.delegateTarget))
 				
 				var color = score ? "success" : "danger"
+				var otherColor = score ? "danger" : "success"
 				$(event.delegateTarget).addClass("btn-"+color)
+				
+				var otherButton = score ? "no" : "yes"
+				$("#"+otherButton+"-"+itemId).removeClass("btn-"+otherColor).addClass("btn-default")
 				
 				if(toRate.length === 0) {
 					console.log(JSON.stringify({scores : message}))
