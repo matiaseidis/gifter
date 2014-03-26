@@ -21,7 +21,7 @@ public class RecommendationDTO implements Serializable {
 		public RecommendationDTO(GiftRecommendation<CanonicalCategory> r) {
 			this.fill(
 					r.getGift().getId(), 
-					r.getGift().getName(), 
+					r.getGift().getTitle(), 
 					r.getGift().getImageURL());
 		}
 		
