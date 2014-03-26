@@ -2,17 +2,10 @@
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
 # The logic to stop your application should be put in this script.
-<<<<<<< HEAD
+
 if [ -z "$(ps -ef | grep jetty | grep -v grep)" ]
 then
     client_result "Application is already stopped"
 else
     kill `ps -ef | grep jetty | grep -v grep | awk '{ print $2 }'` > /dev/null 2>&1
-=======
-if [ -z "$(ps -ef | grep testrubyserver.rb | grep -v grep)" ]
-then
-    client_result "Application is already stopped"
-else
-    kill `ps -ef | grep testrubyserver.rb | grep -v grep | awk '{ print $2 }'` > /dev/null 2>&1
->>>>>>> 4624fb627ea9ff2b8aba4a4b99a58b3f73f29e05
 fi
