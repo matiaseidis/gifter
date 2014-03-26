@@ -33,12 +33,10 @@ public class UpListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent arg0) {
 		try {
 
-			// Collection<CanonicalCategory> iceCategories = iceCategories();
 			Collection<CanonicalCategory> mlCategories = mercadoLibreTargetCategories();
 			Collection<CanonicalCategory> all = Lists.newLinkedList();
 
 			all.addAll(mlCategories);
-			// all.addAll(iceCategories);
 
 			GiftWeighter<CanonicalCategory> giftWeighter = new WeightableWeighter();
 			CanonicalCategoryJaccardDistance metric = new CanonicalCategoryJaccardDistance();
@@ -55,98 +53,16 @@ public class UpListener implements ServletContextListener {
 
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
-		// TODO Auto-generated method stub
-
 	}
 
-	// private static Collection<CanonicalCategory> iceCategories()
-	// throws FileNotFoundException {
-	// Collection<? extends IceCatCategory> iceCategories = new
-	// IceCatParser().parse();
-	// new NoLeafFilter().filter(iceCategories);
-	// return (Collection<CanonicalCategory>) iceCategories;
-	// }
-
-	private static Collection<CanonicalCategory> mercadoLibreTargetCategories()
-			throws FileNotFoundException {
+	private static Collection<CanonicalCategory> mercadoLibreTargetCategories() throws FileNotFoundException {
 		MLCategoryParser mlCategoryParser = new MLCategoryParser();
 		List<MLCategory> mlCategories = mlCategoryParser
 		// .parseMLCategories("mltest.json");
 				.parseMLCategories("ml-categories-ar.json");
 
-		new OtrosFilter().filter(mlCategories);
-		new CategoryStringFilter("Inmuebles").filter(mlCategories);
-		new CategoryStringFilter("Servicios", "Profesionales")
-				.filter(mlCategories);
-		new CategoryStringFilter("Servicios", "Medicina y Salud")
-				.filter(mlCategories);
-		new CategoryStringFilter("Servicios", "Transporte")
-				.filter(mlCategories);
-
-		// new FlagBasedBrandFilter().filter(mlCategories);
-		new NoLeafFilter().filter(mlCategories);
-
-		printMLStats(mlCategories);
 		Collection<? extends CanonicalCategory> r = mlCategories;
 		return (Collection<CanonicalCategory>) r;
-	}
-
-	private static void printMLStats(List<MLCategory> allMlCategories) {
-		int ninos = 0;
-		int ninas = 0;
-		int mujer = 0;
-		int hombre = 0;
-		int discarded = 0;
-		int leaves = 0;
-		int otros = 0;
-		int total = 0;
-		int inmuebles = 0;
-		int candidates = 0;
-		for (MLCategory mlCategory : allMlCategories) {
-			boolean isInmuebles = mlCategory.isFor("Inmuebles");
-			if (isInmuebles) {
-				inmuebles++;
-			}
-			if (mlCategory.isFor("Ninas")) {
-				ninas++;
-			}
-			if (mlCategory.isFor("Ninos")) {
-				ninos++;
-			}
-			if (mlCategory.isFor("Hombre")) {
-				hombre++;
-			}
-			if (mlCategory.isFor("Mujer")) {
-				mujer++;
-			}
-			if (mlCategory.isFor("Otros")) {
-				otros++;
-			}
-			if (mlCategory.isFor("Otras")) {
-				otros++;
-			}
-			if (!mlCategory.isLeaf()) {
-				discarded++;
-			} else {
-				candidates++;
-			}
-
-			if (mlCategory.getChildren_categories().isEmpty()) {
-				leaves++;
-			}
-			total++;
-
-		}
-		System.out.println("Niñas " + ninas);
-		System.out.println("Niños " + ninos);
-		System.out.println("Mujer " + mujer);
-		System.out.println("Hombre " + hombre);
-		System.out.println("Otros " + otros);
-		System.out.println("Leaves " + leaves);
-		System.out.println("Discarded " + discarded);
-		System.out.println("Inmuebeles " + inmuebles);
-		System.out.println("Candidates " + candidates);
-		System.out.println("Total " + total);
 	}
 
 }
