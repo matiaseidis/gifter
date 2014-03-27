@@ -1,7 +1,7 @@
 $(function() {
 			message = {}
 			toRate = []
-			url = "/service/gifter/recommendation"
+			url = "/gifter/service/gifter/recommendation"
 			
 			start = function(r){
 				$.ajax({
