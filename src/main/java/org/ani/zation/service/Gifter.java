@@ -20,6 +20,8 @@ import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.cronopios.regalator.CanonicalCategory;
+import org.cronopios.regalator.GiftItem;
+import org.cronopios.regalator.GiftItemSearchingService;
 import org.cronopios.regalator.GiftRecommendation;
 
 @Path("/gifter")
@@ -28,8 +30,7 @@ public class Gifter {
 	@POST
 	@Path("/recommendation")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response reportScore(JSONObject input,
-			@Context HttpServletRequest httpRequest) {
+	public Response reportScore(JSONObject input, @Context HttpServletRequest httpRequest) {
 
 		System.out.println("SCORE: " + input.toString());
 
@@ -39,8 +40,7 @@ public class Gifter {
 			if (scores.length() > 0) {
 				for (int i = 0; i < scores.length(); i++) {
 					JSONObject score = scores.getJSONObject(i);
-					RecommendationDTO recommendationDTO = new RecommendationDTO(
-							score);
+					RecommendationDTO recommendationDTO = new RecommendationDTO(score);
 					userScore.put(recommendationDTO.getId(), recommendationDTO);
 				}
 			}
@@ -49,13 +49,17 @@ public class Gifter {
 		}
 		HttpSession session = httpRequest.getSession(true);
 		GifterSession gs = (GifterSession) session.getAttribute("gifter");
-
-		Set<GiftRecommendation<CanonicalCategory>> recommended = gs
-				.recommend(userScore);
+		GiftItemSearchingService giftItemSearchingService = (GiftItemSearchingService) session.getServletContext().getAttribute("searchingService");
+		Set<GiftRecommendation<CanonicalCategory>> recommended = gs.recommend(userScore);
 		List<RecommendationDTO> resp = new ArrayList<RecommendationDTO>();
-
+		
 		for (GiftRecommendation<CanonicalCategory> r : recommended) {
-			resp.add(new RecommendationDTO(r));
+			RecommendationDTO e = new RecommendationDTO(r);
+			List<? extends GiftItem> search = giftItemSearchingService.search(r.getGift());
+			for (GiftItem giftItem : search) {
+				e.getItems().add(new GiftItemDTO(giftItem.getTitle(), giftItem.getImage()));
+			}
+			resp.add(e);
 		}
 
 		return Response.status(200).entity(resp).build();

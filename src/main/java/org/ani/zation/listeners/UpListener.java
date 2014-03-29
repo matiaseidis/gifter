@@ -23,6 +23,7 @@ import org.cronopios.regalator.icecat.IceCatCategory;
 import org.cronopios.regalator.icecat.IceCatParser;
 import org.cronopios.regalator.ml.MLCategory;
 import org.cronopios.regalator.ml.MLCategoryParser;
+import org.cronopios.regalator.ml.MLSearchingService;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -41,9 +42,12 @@ public class UpListener implements ServletContextListener {
 			GiftWeighter<CanonicalCategory> giftWeighter = new WeightableWeighter();
 			CanonicalCategoryJaccardDistance metric = new CanonicalCategoryJaccardDistance();
 
+			MLSearchingService mlSearchingService = new MLSearchingService();
+
 			arg0.getServletContext().setAttribute("categories", all);
 			arg0.getServletContext().setAttribute("metric", metric);
 			arg0.getServletContext().setAttribute("giftWeighter", giftWeighter);
+			arg0.getServletContext().setAttribute("searchingService", mlSearchingService);
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -59,7 +63,8 @@ public class UpListener implements ServletContextListener {
 		MLCategoryParser mlCategoryParser = new MLCategoryParser();
 		List<MLCategory> mlCategories = mlCategoryParser
 		// .parseMLCategories("mltest.json");
-				.parseMLCategories("ml-categories-ar.json");
+				.parseMLCategories();
+		mlCategoryParser.filterAndWeight(mlCategories);
 
 		Collection<? extends CanonicalCategory> r = mlCategories;
 		return (Collection<CanonicalCategory>) r;
