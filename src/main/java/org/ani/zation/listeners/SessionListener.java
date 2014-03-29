@@ -15,7 +15,7 @@ import org.cronopios.regalator.GiftWeighter;
 import org.cronopios.regalator.KNearestSpheresYesNoGiftRecommender;
 import org.cronopios.regalator.NeighboursWithinSphereYesNoGiftRecommender;
 
-public class SessionListener implements HttpSessionListener {
+public class SessionListener  implements HttpSessionListener {
 	
 	protected static final Log log = LogFactory.getLog(SessionListener.class);
 
