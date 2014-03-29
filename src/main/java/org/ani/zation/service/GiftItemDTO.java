@@ -4,10 +4,12 @@ public class GiftItemDTO {
 
 	private String image;
 	private String title;
+	private String externalURL;
 
-	public GiftItemDTO(String title, String image) {
+	public GiftItemDTO(String title, String image, String externalURL) {
 		this.setTitle(title);
 		this.setImage(image);
+		this.setExternalURL(externalURL);
 	}
 
 	public String getImage() {
@@ -24,5 +26,13 @@ public class GiftItemDTO {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getExternalURL() {
+		return externalURL;
+	}
+
+	public void setExternalURL(String externalURL) {
+		this.externalURL = externalURL;
 	}
 }

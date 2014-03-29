@@ -52,12 +52,12 @@ public class Gifter {
 		GiftItemSearchingService giftItemSearchingService = (GiftItemSearchingService) session.getServletContext().getAttribute("searchingService");
 		Set<GiftRecommendation<CanonicalCategory>> recommended = gs.recommend(userScore);
 		List<RecommendationDTO> resp = new ArrayList<RecommendationDTO>();
-		
+
 		for (GiftRecommendation<CanonicalCategory> r : recommended) {
 			RecommendationDTO e = new RecommendationDTO(r);
 			List<? extends GiftItem> search = giftItemSearchingService.search(r.getGift());
 			for (GiftItem giftItem : search) {
-				e.getItems().add(new GiftItemDTO(giftItem.getTitle(), giftItem.getImage()));
+				e.getItems().add(new GiftItemDTO(giftItem.getTitle(), giftItem.getImage(), giftItem.getExternalURL()));
 			}
 			resp.add(e);
 		}

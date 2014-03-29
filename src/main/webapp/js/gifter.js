@@ -33,11 +33,14 @@ $(function() {
 							}).appendTo('#' + item.id)
 
 							$.each(item.items, function(b, a) {
-								jQuery('<img/>', {
+
+								$('<a />', {
+									href : a.externalURL
+								}).append($('<img/>', {
 									src : a.image,
 									alt : a.title,
 									height : "140"
-								}).appendTo('#' + item.id)
+								})).appendTo('#' + item.id)
 							})
 
 							$('#' + item.id + " .rateBox").append(
