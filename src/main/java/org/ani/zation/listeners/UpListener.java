@@ -3,30 +3,19 @@ package org.ani.zation.listeners;
 import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import org.cronopios.regalator.CanonicalCategory;
 import org.cronopios.regalator.CanonicalCategoryJaccardDistance;
-import org.cronopios.regalator.GiftRecommendation;
-import org.cronopios.regalator.GiftRecommender;
 import org.cronopios.regalator.GiftWeighter;
-import org.cronopios.regalator.KNearestSpheresYesNoGiftRecommender;
-import org.cronopios.regalator.NeighboursWithinSphereYesNoGiftRecommender;
 import org.cronopios.regalator.WeightableWeighter;
-import org.cronopios.regalator.filters.CategoryStringFilter;
-import org.cronopios.regalator.filters.NoLeafFilter;
-import org.cronopios.regalator.filters.OtrosFilter;
-import org.cronopios.regalator.icecat.IceCatCategory;
-import org.cronopios.regalator.icecat.IceCatParser;
 import org.cronopios.regalator.ml.MLCategory;
 import org.cronopios.regalator.ml.MLCategoryParser;
 import org.cronopios.regalator.ml.MLSearchingService;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 public class UpListener implements ServletContextListener {
 
