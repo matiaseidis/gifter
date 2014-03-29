@@ -37,6 +37,7 @@ public class Gifter {
 		Map<String, RecommendationDTO> userScore = new HashMap<String, RecommendationDTO>();
 		try {
 			JSONArray scores = input.getJSONArray("scores");
+			System.out.println(scores.length());
 			if (scores.length() > 0) {
 				for (int i = 0; i < scores.length(); i++) {
 					JSONObject score = scores.getJSONObject(i);

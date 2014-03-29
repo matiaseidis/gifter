@@ -1,7 +1,6 @@
 package org.ani.zation.recommender;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +12,8 @@ import org.apache.commons.logging.LogFactory;
 import org.cronopios.regalator.CanonicalCategory;
 import org.cronopios.regalator.GiftRecommendation;
 import org.cronopios.regalator.GiftRecommender;
+
+import com.google.common.collect.Lists;
 
 public class GifterSession {
 
@@ -27,19 +28,22 @@ public class GifterSession {
 		this.recommender = recommender;
 	}
 
-	public Set<GiftRecommendation<CanonicalCategory>> recommend(
-			Map<String, RecommendationDTO> news) {
+	public Set<GiftRecommendation<CanonicalCategory>> recommend(Map<String, RecommendationDTO> news) {
 
 		if (!news.isEmpty()) {
-
 			for (GiftRecommendation<CanonicalCategory> pending : toRate) {
 				boolean score = news.get(pending.getGift().getId()).getUserScore();
 				pending.setUserScore(score ? 1D : 0D);
 			}
 			rated.addAll(toRate);
 			toRate.clear();
+		} else {
+			System.out.println("news is empty");
 		}
-		return this.recommender.recommend(rated, nRecommendations);
+
+		Set<GiftRecommendation<CanonicalCategory>> recommend = this.recommender.recommend(rated, nRecommendations);
+		this.toRate = Lists.newArrayList(recommend);
+		return recommend;
 	}
 
 }
