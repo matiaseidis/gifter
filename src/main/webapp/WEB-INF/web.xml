@@ -35,6 +35,7 @@
 	<servlet-mapping>
 		<servlet-name>jersey-serlvet</servlet-name>
 		<url-pattern>/service/*</url-pattern>
+		<url-pattern>/gifter/service/*</url-pattern>
 	</servlet-mapping>
 	
 	<welcome-file-list>
