@@ -14,6 +14,11 @@ $(function() {
 						$("#mainBox").empty();
 						message = data
 						$.each(data, function(index, item) {
+							var title = item.name;
+							var image = item.imageURL;
+							if (item.items[0].image) {
+								image = item.items[0].image;
+							}
 							toRate.push(index)
 							jQuery('<div/>', {
 								id : item.id,
@@ -21,27 +26,23 @@ $(function() {
 								class : "col-md-4"
 							}).appendTo('#mainBox')
 							jQuery('<div/>', {
-								text : item.name
+								text : title
 							}).appendTo('#' + item.id)
+
+							$('<div/>').append($('<a />', {
+								href : item.items[0].externalURL,
+								text : item.items[0].title
+							})).appendTo('#' + item.id)
+
 							jQuery('<img/>', {
-								src : item.imageURL,
-								alt : item.name,
+								src : image,
+								alt : title,
 								height : "140"
 							}).appendTo('#' + item.id)
+
 							jQuery('<div/>', {
 								class : "rateBox"
 							}).appendTo('#' + item.id)
-
-							$.each(item.items, function(b, a) {
-
-								$('<a />', {
-									href : a.externalURL
-								}).append($('<img/>', {
-									src : a.image,
-									alt : a.title,
-									height : "140"
-								})).appendTo('#' + item.id)
-							})
 
 							$('#' + item.id + " .rateBox").append(
 									button("yes-" + item.id, "rateBoxElem",
