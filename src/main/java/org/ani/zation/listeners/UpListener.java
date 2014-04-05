@@ -1,6 +1,7 @@
 package org.ani.zation.listeners;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
@@ -39,6 +40,10 @@ public class UpListener implements ServletContextListener {
 			arg0.getServletContext().setAttribute("searchingService", mlSearchingService);
 
 		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -48,7 +53,7 @@ public class UpListener implements ServletContextListener {
 	public void contextDestroyed(ServletContextEvent arg0) {
 	}
 
-	private static Collection<CanonicalCategory> mercadoLibreTargetCategories() throws FileNotFoundException {
+	private static Collection<CanonicalCategory> mercadoLibreTargetCategories() throws IOException {
 		MLCategoryParser mlCategoryParser = new MLCategoryParser();
 		List<MLCategory> mlCategories = mlCategoryParser
 		// .parseMLCategories("mltest.json");
