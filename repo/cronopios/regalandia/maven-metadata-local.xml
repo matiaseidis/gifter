@@ -2,11 +2,10 @@
 <metadata>
   <groupId>cronopios</groupId>
   <artifactId>regalandia</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <versioning>
     <versions>
       <version>0.0.1-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20140331122106</lastUpdated>
+    <lastUpdated>20140331173323</lastUpdated>
   </versioning>
 </metadata>
