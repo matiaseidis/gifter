@@ -1,1 +1,1 @@
-cp -fr /home/us/.m2/repository/cronopios /home/us/dev/apps/gifter/repo/
+cp -fr $HOME/.m2/repository/cronopios ./repo/
