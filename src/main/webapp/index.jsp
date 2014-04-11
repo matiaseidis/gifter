@@ -23,18 +23,17 @@
 
 
 	<div class="container">
-	
+
 		<div id="spinner">
+			<h1>Gifter!</h1>
 			<div id="spinner-inner">
 				<img id="thinking" src="images/thinking.jpg">
 			</div>
 		</div>
-		
-		<div id="detalle">modal test</div>
-		
+
 		<h1>Gifter!</h1>
 		<div id="mainBox" class="row"></div>
-		
+
 	</div>
 
 </body>

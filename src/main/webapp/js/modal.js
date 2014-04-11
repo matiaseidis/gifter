@@ -1,7 +1,7 @@
 $(function(){
-	modal = function(itemId) {
+	modal = function(item) {
 	    
-		var fade = jQuery('<div/>', { class : "modal fade detailBox", id: itemId});
+		var fade = jQuery('<div/>', { class : "modal fade detailBox", id: item.id});
 		var content = jQuery('<div/>', { class : "modal-content"});
 		var dialog = jQuery('<div/>', { class : "modal-dialog"});
 		var header = jQuery('<div/>', { class : "modal-header"});
@@ -27,6 +27,7 @@ $(function(){
 			"aria-hidden":"true",
 			text: "x"			
 		});
+		
 		var headerTitle = jQuery('<h4/>', { 
 			class : "modal-title",
 			text: "Modal title"

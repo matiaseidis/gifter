@@ -4,8 +4,33 @@ $(function() {
 	toRate = [];
 	url = "/service/gifter/recommendation";
 	
-	start = function(r) {
+	splitCategories = function(title, elem) {
+		var splitted = title.split(">");
+		$.each(splitted, function(index, item) {
+			elem.append($("<span/>", {
+				class: "label label-info",
+				text: item
+			}));
+			
+//			if(index < splitted.length -2) {
+//				elem.append($("<span/>", {
+//					class: "label label-white",
+//					text: ">"
+//				}));
+//			}
+		});
+	};
+	
+	spinnerOn = function(){
 		$("#spinner").show();
+	};
+	
+	spinnerOff = function(){
+		$("#spinner").hide();
+	};
+	
+	start = function(r) {
+		spinnerOn();
 		$.ajax(
 				{
 					type : "POST",
@@ -26,47 +51,53 @@ $(function() {
 							jQuery('<div/>', {
 								id : item.id,
 								// class: "col-xs-6 col-sm-4"
-								class : "col-md-4"
+								class : "item-box col-md-4"
 							}).appendTo('#mainBox');
-							jQuery('<div/>', {
-								text : title
-							}).appendTo('#' + item.id);
 
-							$('<div/>').append($('<a />', {
+							var itemCategoryBox = jQuery('<div/>', {
+								class: "item-category-box"
+							});
+							splitCategories(title, itemCategoryBox);
+							itemCategoryBox.appendTo('#' + item.id);
+
+							$('<div/>', {class: "item-title-box"})
+							.append($('<a />', {
 								href : item.items[0].externalURL,
 								text : item.items[0].title,
 								class : "detail"
-							})).appendTo('#' + item.id);
+							}))
+							.appendTo('#' + item.id);
 							
 							$('#' + item.id + " a.detail").on("click", function(e){
 								e.preventDefault();
 								$('#' + item.id + " .detailBox").modal('show');
 							});
 
-							jQuery('<img/>', {
+							$('<div/>', {class: "item-main-image-box"}).append(jQuery('<img/>', {
 								src : image,
-								alt : title,
-								height : "20"
-							}).appendTo('#' + item.id);
-
-							jQuery('<div/>', {
-								class : "rateBox"
-							}).appendTo('#' + item.id);
+								alt : title
+							})).appendTo('#' + item.id);
 							
-							modal(item.id).appendTo('#' + item.id);
+							$('<div/>', { class : "rateBox" }).appendTo('#' + item.id);
 
-							$('#' + item.id + " .rateBox").append(button("yes-" + item.id, "rateBoxElem", "ok"));
+							modal(item).appendTo('#' + item.id);
+							
+							var goodRecommendationButton = button("yes-" + item.id, "rateBoxElem", "ok"); 
 									
-							$(".rateBox button#" + "yes-" + item.id).on("click", function(e) {
-										e.preventDefault();
-										updateRate(e, item.id, index, true);
-									});
+							var badRecommendationButton = button("no-" + item.id, "rateBoxElem", "remove");
 
-							$('#' + item.id + " .rateBox").append(button("no-" + item.id, "rateBoxElem", "remove"));
-							$(".rateBox button#" + "no-" + item.id).on("click", function(e) {
-										e.preventDefault();
-										updateRate(e, item.id, index, false);
-									});
+							$('#' + item.id + " .rateBox").append(goodRecommendationButton);
+							$('#' + item.id + " .rateBox").append(badRecommendationButton);
+							
+							$("#" + "yes-" + item.id).on("click", function(e) {
+								e.preventDefault();
+								updateRate(e, item.id, index, true);
+							});
+							
+							$("#" + "no-" + item.id).on("click", function(e) {
+								e.preventDefault();
+								updateRate(e, item.id, index, false);
+							});
 						});
 					},
 					dataType : "json"
@@ -74,7 +105,7 @@ $(function() {
 					console.log("errores");
 					console.log(err);
 				}).always(function(){
-					$("#spinner").hide();
+					spinnerOff();
 				});
 	};
 
@@ -91,6 +122,7 @@ $(function() {
 
 		var color = score ? "success" : "danger";
 		var otherColor = score ? "danger" : "success";
+		console.log($(event.delegateTarget));
 		$(event.delegateTarget).addClass("btn-" + color);
 
 		var otherButton = score ? "no" : "yes";
@@ -108,10 +140,19 @@ $(function() {
 	};
 
 	button = function(id, clazz, icon) {
-		return "<button id=\"" + id
-				+ "\" type=\"button\" class=\"btn btn-default " + clazz
-				+ "\"><span class=\"glyphicon glyphicon-" + icon
-				+ "\"></span></button>";
-	}
+		var b = $("<a />", {
+			id: id,
+			class: "btn-default btn-lg " + clazz + " button-"+icon,
+			"role": "button"
+		});
+		var img = $("<span />", {
+			class: "glyphicon glyphicon-" + icon
+		});
+//		var img = $("<img/>", {
+//			src: "../images/" + icon + ".png"
+//		});
+		b.append(img);
+		return b;
+	};
 
 });

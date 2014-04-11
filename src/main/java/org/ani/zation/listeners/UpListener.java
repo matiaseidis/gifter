@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -38,6 +39,9 @@ public class UpListener implements ServletContextListener {
 			arg0.getServletContext().setAttribute("metric", metric);
 			arg0.getServletContext().setAttribute("giftWeighter", giftWeighter);
 			arg0.getServletContext().setAttribute("searchingService", mlSearchingService);
+			
+			arg0.getServletContext().setAttribute("execPool", Executors.newFixedThreadPool(120));
+			
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

@@ -5,7 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.POST;
@@ -26,6 +31,9 @@ import org.cronopios.regalator.GiftRecommendation;
 
 @Path("/gifter")
 public class Gifter {
+	
+	@javax.ws.rs.core.Context 
+	ServletContext context;
 
 	@POST
 	@Path("/recommendation")
@@ -50,17 +58,43 @@ public class Gifter {
 		}
 		HttpSession session = httpRequest.getSession(true);
 		GifterSession gs = (GifterSession) session.getAttribute("gifter");
-		GiftItemSearchingService giftItemSearchingService = (GiftItemSearchingService) session.getServletContext().getAttribute("searchingService");
+		final GiftItemSearchingService giftItemSearchingService = (GiftItemSearchingService) session.getServletContext().getAttribute("searchingService");
 		Set<GiftRecommendation<CanonicalCategory>> recommended = gs.recommend(userScore);
 		List<RecommendationDTO> resp = new ArrayList<RecommendationDTO>();
+		
+		ExecutorService execPool = (ExecutorService)context.getAttribute("execPool");
+		
+		List<Future<RecommendationDTO>> promises = new ArrayList<Future<RecommendationDTO>>();
 
-		for (GiftRecommendation<CanonicalCategory> r : recommended) {
-			RecommendationDTO e = new RecommendationDTO(r);
-			List<? extends GiftItem> search = giftItemSearchingService.search(r.getGift());
-			for (GiftItem giftItem : search) {
-				e.getItems().add(new GiftItemDTO(giftItem.getTitle(), giftItem.getImage(), giftItem.getExternalURL()));
+		for (final GiftRecommendation<CanonicalCategory> r : recommended) {
+			
+			final RecommendationDTO e = new RecommendationDTO(r);
+			
+			Future<RecommendationDTO> incomingRecommendation = execPool.submit(new Callable<RecommendationDTO>() {
+
+				@Override
+				public RecommendationDTO call() throws Exception {
+					List<? extends GiftItem> searchResult = giftItemSearchingService.search(r.getGift());
+					for (GiftItem giftItem : searchResult) {
+						e.getItems().add(new GiftItemDTO(giftItem.getTitle(), giftItem.getImage(), giftItem.getExternalURL()));
+					}
+					return e;
+				}
+				
+			});
+			
+			promises.add(incomingRecommendation);
+
+		}
+		
+		for(Future<RecommendationDTO> fr: promises) {
+			try {
+				resp.add(fr.get());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				e.printStackTrace();
 			}
-			resp.add(e);
 		}
 
 		return Response.status(200).entity(resp).build();

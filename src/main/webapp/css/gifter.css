@@ -1,3 +1,8 @@
+h1 {
+	font-size: 130px;
+	line-height: 1;
+	text-align: center;
+}
 #spinner {
 	position: absolute;
 	display: block;
@@ -6,6 +11,9 @@
 	background:  url("../images/bkg_transparent.png") repeat scroll 0 0 transparent;
 	left: 0%;
 	z-index:9999;
+}
+#spinner h1 {
+	color: #FFF;
 }
 #spinner-inner {
 	position: absolute;
@@ -20,4 +28,55 @@
 }
 #mainBox {
 	z-index:9998;
+}
+
+.item-box {
+/* 	border: 1px solid #EDEDED; */
+/* 	border-radius: 5px; */
+}
+
+.item-category-box {
+	min-height: 60px;
+/* 	padding-top: 3px; */
+}
+.item-category-box span.label {
+	margin: 3px 0 0 3px;
+	padding: 5px;
+	float: left;
+}
+.item-title-box {
+	min-height: 40px;
+	clear: both;
+	text-align: center;
+	margin: 15px 0 15px 0;
+}
+.item-title-box a {
+	font-size: 22px;
+}
+.item-main-image-box {
+	min-height: 100px;
+	text-align: center;
+}
+.item-main-image-box img {
+/* 	height: 250px; */
+	max-width: 350px;
+}
+
+.rateBox {
+	margin-top: 25px;
+	margin-bottom: 20px;
+	text-align: center;
+}
+.rateBox span {
+	
+}
+span.label-white {
+	color: #666;
+}
+.button-remove, .button-ok {
+	width: 40%;
+	margin: 0 3px 0 3px;
+}
+.button-ok {
+	
 }
