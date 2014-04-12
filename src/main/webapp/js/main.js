@@ -75,7 +75,8 @@ $(function() {
 
 							$('<div/>', {class: "item-main-image-box"}).append(jQuery('<img/>', {
 								src : image,
-								alt : title
+								alt : title,
+								lowsrc: "../images/spinner.gif"
 							})).appendTo('#' + item.id);
 							
 							$('<div/>', { class : "rateBox" }).appendTo('#' + item.id);
