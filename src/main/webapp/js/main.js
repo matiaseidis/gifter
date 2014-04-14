@@ -4,19 +4,28 @@ $(function() {
 	toRate = [];
 	url = "/service/gifter/recommendation";
 	
-	splitCategories = function(title, elem) {
+	breadcrumb = function(title, elem) {
 		var splitted = title.split(">");
 		$.each(splitted, function(index, item) {
-			elem.append($("<h5 />").append($("<span/>", {
-				class: "label label-info ",
+//			elem.append($("<h5 />").append($("<span/>", {
+//				class: "label label-info ",
+//				text: item
+//			})));
+			
+			elem.append(
+					$("<h6 />").append(
+							$("<span/>", {
+//				class: "label label-info ",
 				text: item
-			})));
+			}))
+			)
+			;
 			
 			if(index < splitted.length -2) {
-				elem.append($("<span/>", {
+				elem.append($("<h5 />").append($("<span/>", {
 					class: "label label-white",
-					text: ">"
-				}));
+					text: ">>"
+				})));
 			}
 		});
 	};
@@ -60,7 +69,7 @@ $(function() {
 							var itemCategoryBox = $('<div/>', {
 								class: "item-category-box"
 							});
-							splitCategories(title, itemCategoryBox);
+							breadcrumb(title, itemCategoryBox);
 							itemCategoryBox.appendTo('#' + item.id);
 
 							$('<div/>', {class: "category-title-separator"}).appendTo('#' + item.id);
