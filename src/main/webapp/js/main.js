@@ -3,31 +3,39 @@ $(function() {
 	message = {};
 	toRate = [];
 	url = "/service/gifter/recommendation";
-	
+
 	breadcrumb = function(title, elem) {
 		var splitted = title.split(">");
+		var bc = $("<ol />", {class:"breadcrumb"});
 		$.each(splitted, function(index, item) {
 //			elem.append($("<h5 />").append($("<span/>", {
 //				class: "label label-info ",
 //				text: item
 //			})));
-			
-			elem.append(
-					$("<h6 />").append(
-							$("<span/>", {
-//				class: "label label-info ",
-				text: item
-			}))
-			)
-			;
-			
 			if(index < splitted.length -2) {
-				elem.append($("<h5 />").append($("<span/>", {
-					class: "label label-white",
-					text: ">>"
-				})));
+				bc.append($("<li />", { text: item }));
+//				var li = $("<li />");
+//				li.append($("<a />", {
+//					href: "#",
+//					text: item, 
+//					title: item
+//					}));
+//				bc.append(li);
+			} else if (index < splitted.length -1) {
+				bc.append($("<li />", { 
+					text: item,
+					class: "active"
+				}));
 			}
+			
+//			if(index < splitted.length -2) {
+//				elem.append($("<h5 />").append($("<span/>", {
+//					class: "label label-white",
+//					text: ">>"
+//				})));
+//			}
 		});
+		elem.append(bc);
 	};
 	
 	spinnerOn = function(){
@@ -72,7 +80,7 @@ $(function() {
 							breadcrumb(title, itemCategoryBox);
 							itemCategoryBox.appendTo('#' + item.id);
 
-							$('<div/>', {class: "category-title-separator"}).appendTo('#' + item.id);
+//							$('<div/>', {class: "category-title-separator"}).appendTo('#' + item.id);
 							
 							$('<div/>', {class: "item-title-box"})
 							.append($('<a />', {

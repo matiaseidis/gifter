@@ -46,11 +46,15 @@ h1 {
 	float: left;
 	color: #999;
 }
-.category-title-separator {
-	border-bottom: 1px solid #EDEDED;
-	clear: both;
-	padding: 5px 0 0 0;
+/* .category-title-separator { */
+/* 	border-bottom: 1px solid #EDEDED; */
+/* 	clear: both; */
+/* 	padding: 5px 0 0 0; */
+/* } */
+.breadcrumb {
+	background-color: #EDEDED;
 }
+
 .item-title-box {
 	min-height: 40px;
 	clear: both;
