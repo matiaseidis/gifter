@@ -51,7 +51,7 @@ $(function() {
 								image = item.items[0].image;
 							}
 							toRate.push(index);
-							jQuery('<div/>', {
+							$('<div/>', {
 								id : item.id,
 								// class: "col-xs-6 col-sm-4"
 								class : "item-box col-md-4"
@@ -78,7 +78,7 @@ $(function() {
 								$('#' + item.id + " .detailBox").modal('show');
 							});
 
-							$('<div/>', {class: "item-main-image-box"}).append(jQuery('<img/>', {
+							$('<div/>', {class: "item-main-image-box"}).append($('<img/>', {
 								src : image,
 								alt : title,
 								lowsrc: "../images/spinner.gif"

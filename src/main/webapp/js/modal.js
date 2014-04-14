@@ -1,18 +1,18 @@
 $(function(){
 	modal = function(item) {
 	    
-		var fade = jQuery('<div/>', { class : "modal fade detailBox", id: item.id});
-		var content = jQuery('<div/>', { class : "modal-content"});
-		var dialog = jQuery('<div/>', { class : "modal-dialog"});
-		var header = jQuery('<div/>', { class : "modal-header"});
-		var body = jQuery('<div/>', { class : "modal-body"});
-		var footer = jQuery('<div/>', { class : "modal-footer"});
+		var fade = $('<div/>', { class : "modal fade detailBox", id: item.id});
+		var content = $('<div/>', { class : "modal-content"});
+		var dialog = $('<div/>', { class : "modal-dialog"});
+		var header = $('<div/>', { class : "modal-header"});
+		var body = $('<div/>', { class : "modal-body"});
+		var footer = $('<div/>', { class : "modal-footer"});
 		
-		var bodyContent = jQuery('<p/>', { text : "modal-body content demo"});
+		var bodyContent = $('<p/>', { text : "modal-body content demo"});
 		
 		bodyContent.appendTo(body);
 		
-		var purchaseButton = jQuery('<button/>', { 
+		var purchaseButton = $('<button/>', { 
 			class : "btn btn-primary",
 			"type": "button", 
 			text: "Comprar"			
@@ -20,7 +20,7 @@ $(function(){
 		
 		purchaseButton.appendTo(footer);
 		
-		var headerButton = jQuery('<button/>', { 
+		var headerButton = $('<button/>', { 
 			class : "close",
 			"type": "button", 
 			"data-dismiss": "modal",
@@ -28,7 +28,7 @@ $(function(){
 			text: "x"			
 		});
 		
-		var headerTitle = jQuery('<h4/>', { 
+		var headerTitle = $('<h4/>', { 
 			class : "modal-title",
 			text: "Modal title"
 		});
