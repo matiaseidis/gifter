@@ -7,26 +7,28 @@ $(function() {
 	splitCategories = function(title, elem) {
 		var splitted = title.split(">");
 		$.each(splitted, function(index, item) {
-			elem.append($("<span/>", {
-				class: "label label-info",
+			elem.append($("<h5 />").append($("<span/>", {
+				class: "label label-info ",
 				text: item
-			}));
+			})));
 			
-//			if(index < splitted.length -2) {
-//				elem.append($("<span/>", {
-//					class: "label label-white",
-//					text: ">"
-//				}));
-//			}
+			if(index < splitted.length -2) {
+				elem.append($("<span/>", {
+					class: "label label-white",
+					text: ">"
+				}));
+			}
 		});
 	};
 	
 	spinnerOn = function(){
 		$("#spinner").show();
+		$("#more-button").toggle();
 	};
 	
 	spinnerOff = function(){
 		$("#spinner").hide();
+		$("#more-button").toggle();
 	};
 	
 	start = function(r) {
@@ -54,12 +56,14 @@ $(function() {
 								class : "item-box col-md-4"
 							}).appendTo('#mainBox');
 
-							var itemCategoryBox = jQuery('<div/>', {
+							var itemCategoryBox = $('<div/>', {
 								class: "item-category-box"
 							});
 							splitCategories(title, itemCategoryBox);
 							itemCategoryBox.appendTo('#' + item.id);
 
+							$('<div/>', {class: "category-title-separator"}).appendTo('#' + item.id);
+							
 							$('<div/>', {class: "item-title-box"})
 							.append($('<a />', {
 								href : item.items[0].externalURL,
@@ -85,20 +89,20 @@ $(function() {
 							
 							var goodRecommendationButton = button("yes-" + item.id, "rateBoxElem", "ok"); 
 									
-							var badRecommendationButton = button("no-" + item.id, "rateBoxElem", "remove");
+//							var badRecommendationButton = button("no-" + item.id, "rateBoxElem", "remove");
 
 							$('#' + item.id + " .rateBox").append(goodRecommendationButton);
-							$('#' + item.id + " .rateBox").append(badRecommendationButton);
+//							$('#' + item.id + " .rateBox").append(badRecommendationButton);
 							
 							$("#" + "yes-" + item.id).on("click", function(e) {
 								e.preventDefault();
 								updateRate(e, item.id, index, true);
 							});
 							
-							$("#" + "no-" + item.id).on("click", function(e) {
-								e.preventDefault();
-								updateRate(e, item.id, index, false);
-							});
+//							$("#" + "no-" + item.id).on("click", function(e) {
+//								e.preventDefault();
+//								updateRate(e, item.id, index, false);
+//							});
 						});
 					},
 					dataType : "json"
@@ -149,11 +153,14 @@ $(function() {
 		var img = $("<span />", {
 			class: "glyphicon glyphicon-" + icon
 		});
-//		var img = $("<img/>", {
-//			src: "../images/" + icon + ".png"
-//		});
 		b.append(img);
 		return b;
 	};
+	
+	$("#more-button").on("click", function(){
+		start(JSON.stringify({
+			scores : message
+		}));
+	});
 
 });

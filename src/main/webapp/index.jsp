@@ -25,14 +25,18 @@
 	<div class="container">
 
 		<div id="spinner">
-			<h1>Gifter!</h1>
+			<h1>Gifter</h1>
 			<div id="spinner-inner">
 				<img id="thinking" src="images/thinking.jpg">
 			</div>
 		</div>
 
-		<h1>Gifter!</h1>
+		<h1>Gifter</h1>
+		<div id="upperBox" class="row">
+		<a id="more-button" class="btn-primary btn-lg" role="button">Mas recomendaciónes</a>
+		</div>
 		<div id="mainBox" class="row"></div>
+		<div id="lowerBox" class="row"></div>
 
 	</div>
 
