@@ -33,7 +33,7 @@
 
 		<h1>Gifter</h1>
 		<div id="upperBox" class="row">
-		<a id="more-button" class="btn-primary btn-lg" role="button">Mas recomendaciónes</a>
+		<a id="more-button" class="btn btn-primary btn-lg" role="button">Mas recomendaciónes</a>
 		</div>
 		<div id="mainBox" class="row"></div>
 		<div id="lowerBox" class="row"></div>
