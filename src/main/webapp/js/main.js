@@ -33,6 +33,7 @@ $(function() {
 	
 	start = function(r) {
 		spinnerOn();
+		toRate = [];
 		$.ajax(
 				{
 					type : "POST",
