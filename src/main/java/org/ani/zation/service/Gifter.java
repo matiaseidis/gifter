@@ -31,8 +31,8 @@ import org.cronopios.regalator.GiftRecommendation;
 
 @Path("/gifter")
 public class Gifter {
-	
-	@javax.ws.rs.core.Context 
+
+	@javax.ws.rs.core.Context
 	ServletContext context;
 
 	@POST
@@ -61,33 +61,33 @@ public class Gifter {
 		final GiftItemSearchingService giftItemSearchingService = (GiftItemSearchingService) session.getServletContext().getAttribute("searchingService");
 		Set<GiftRecommendation<CanonicalCategory>> recommended = gs.recommend(userScore);
 		List<RecommendationDTO> resp = new ArrayList<RecommendationDTO>();
-		
-		ExecutorService execPool = (ExecutorService)context.getAttribute("execPool");
-		
+
+		ExecutorService execPool = (ExecutorService) context.getAttribute("execPool");
+
 		List<Future<RecommendationDTO>> promises = new ArrayList<Future<RecommendationDTO>>();
 
 		for (final GiftRecommendation<CanonicalCategory> r : recommended) {
-			
+
 			final RecommendationDTO e = new RecommendationDTO(r);
-			
+
 			Future<RecommendationDTO> incomingRecommendation = execPool.submit(new Callable<RecommendationDTO>() {
 
 				@Override
 				public RecommendationDTO call() throws Exception {
 					List<? extends GiftItem> searchResult = giftItemSearchingService.search(r.getGift());
 					for (GiftItem giftItem : searchResult) {
-						e.getItems().add(new GiftItemDTO(giftItem.getTitle(), giftItem.getImage(), giftItem.getExternalURL()));
+						e.getItems().add(new GiftItemDTO(giftItem.getTitle(), giftItem.getImages().get(0), giftItem.getExternalURL()));
 					}
 					return e;
 				}
-				
+
 			});
-			
+
 			promises.add(incomingRecommendation);
 
 		}
-		
-		for(Future<RecommendationDTO> fr: promises) {
+
+		for (Future<RecommendationDTO> fr : promises) {
 			try {
 				resp.add(fr.get());
 			} catch (InterruptedException e) {
