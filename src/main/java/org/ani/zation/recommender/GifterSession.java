@@ -12,6 +12,8 @@ import org.apache.commons.logging.LogFactory;
 import org.cronopios.regalator.CanonicalCategory;
 import org.cronopios.regalator.GiftRecommendation;
 import org.cronopios.regalator.GiftRecommender;
+import org.cronopios.regalator.ml.MLTagsFilter;
+import org.cronopios.regalator.ml.MLTagsPredicate;
 
 import com.google.common.collect.Lists;
 
@@ -41,6 +43,12 @@ public class GifterSession {
 			System.out.println("news is empty");
 		}
 
+		this.recommender.filterGifts(new MLTagsPredicate("baby"));
+		this.recommender.filterGifts(new MLTagsPredicate("girl"));
+		this.recommender.filterGifts(new MLTagsPredicate("female"));
+		this.recommender.filterGifts(new MLTagsPredicate("boy"));
+		this.recommender.filterGifts(new MLTagsPredicate("male"));
+		
 		Set<GiftRecommendation<CanonicalCategory>> recommend = this.recommender.recommend(rated, nRecommendations);
 		this.toRate = Lists.newArrayList(recommend);
 		return recommend;
