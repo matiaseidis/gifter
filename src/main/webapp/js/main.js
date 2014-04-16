@@ -3,39 +3,43 @@ $(function() {
 	message = {};
 	toRate = [];
 	url = "/service/gifter/recommendation";
+	
+	zoom = function(image){
+		console.log("zoom for " + image);
+		var a = $("<a />", {
+			"href": image,
+			"target": "_blank",
+			class: "zoom ch-shownby-pointerenter ch-zoom-trigger",
+			"aria-owns":"ch-zoom-33",
+			"aria-haspopup":"true",
+			"data-side":"right",
+			"data-align":"top",
+			"style":"width: 128px; height: 128px;"
+		});
+		var i = $("<img />", {
+			src: image
+		});
+		var seeker = $("<div />", {
+			class:"ch-zoom-seeker ch-hide",
+			style:"width: 75px; height: 75px; left: 30.5px; top: 0px;"
+		});
+		i.appendTo(a);
+		seeker.appendTo(a);
+		new ch.Zoom(a);
+		return a;
+	};
 
 	breadcrumb = function(title, elem) {
 		var splitted = title.split(">");
-		var bc = $("<ol />", {class:"breadcrumb"});
 		$.each(splitted, function(index, item) {
-//			elem.append($("<h5 />").append($("<span/>", {
-//				class: "label label-info ",
-//				text: item
-//			})));
-			if(index < splitted.length -2) {
-				bc.append($("<li />", { text: item }));
-//				var li = $("<li />");
-//				li.append($("<a />", {
-//					href: "#",
-//					text: item, 
-//					title: item
-//					}));
-//				bc.append(li);
-			} else if (index < splitted.length -1) {
-				bc.append($("<li />", { 
-					text: item,
-					class: "active"
-				}));
+			if (index < splitted.length -1) {
+			elem.append($("<input />", {
+				type: "button",
+				value: item,
+				class: "ch-btn-skin ch-btn-small breadcrumb-item"
+			}));
 			}
-			
-//			if(index < splitted.length -2) {
-//				elem.append($("<h5 />").append($("<span/>", {
-//					class: "label label-white",
-//					text: ">>"
-//				})));
-//			}
 		});
-		elem.append(bc);
 	};
 	
 	spinnerOn = function(){
@@ -64,8 +68,8 @@ $(function() {
 						$.each(data, function(index, item) {
 							var title = item.name;
 							var image = item.imageURL;
-							if (item.items[0].image) {
-								image = item.items[0].image;
+							if (item.items[0].images[0]) {
+								image = item.items[0].images[0];
 							}
 							toRate.push(index);
 							$('<div/>', {
@@ -80,8 +84,6 @@ $(function() {
 							breadcrumb(title, itemCategoryBox);
 							itemCategoryBox.appendTo('#' + item.id);
 
-//							$('<div/>', {class: "category-title-separator"}).appendTo('#' + item.id);
-							
 							$('<div/>', {class: "item-title-box"})
 							.append($('<a />', {
 								href : item.items[0].externalURL,
@@ -90,11 +92,8 @@ $(function() {
 							}))
 							.appendTo('#' + item.id);
 							
-							$('#' + item.id + " a.detail").on("click", function(e){
-								e.preventDefault();
-								$('#' + item.id + " .detailBox").modal('show');
-							});
-
+							detailModal(item).appendTo('#' + item.id);
+							
 							$('<div/>', {class: "item-main-image-box"}).append($('<img/>', {
 								src : image,
 								alt : title,
@@ -103,24 +102,45 @@ $(function() {
 							
 							$('<div/>', { class : "rateBox" }).appendTo('#' + item.id);
 
-							modal(item).appendTo('#' + item.id);
-							
 							var goodRecommendationButton = button("yes-" + item.id, "rateBoxElem", "ok"); 
 									
-//							var badRecommendationButton = button("no-" + item.id, "rateBoxElem", "remove");
-
 							$('#' + item.id + " .rateBox").append(goodRecommendationButton);
-//							$('#' + item.id + " .rateBox").append(badRecommendationButton);
 							
 							$("#" + "yes-" + item.id).on("click", function(e) {
 								e.preventDefault();
 								updateRate(e, item.id, index, true);
 							});
 							
-//							$("#" + "no-" + item.id).on("click", function(e) {
-//								e.preventDefault();
-//								updateRate(e, item.id, index, false);
-//							});
+							$('#' + item.id + " a.detail").on("click", function(e){
+								e.preventDefault();
+								var modalSelector = '#' + item.id + " .detailBox"; 
+								var modal = $(modalSelector);
+								modal.modal('show', {keyboard: true});
+								modal.on('shown.bs.modal', function() {
+									$.each(item.items[0].images, function(index, image) {
+										var img = $("<img />", {
+											src: image
+										});
+										img.appendTo($(modalSelector + " .modal-body-left"));
+										if(index == 0) {
+											img.addClass("first");
+											$(modalSelector + " .modal-body-right img").attr("src", image);
+											$(modalSelector + " .modal-body-left .first").css("border", "5px solid #999");
+											
+//											$(modalSelector + " .modal-body-right").empty();
+//											$(modalSelector + " .modal-body-right").append(zoom(image));
+										}
+									});
+									$(modalSelector + " .modal-body-left img")
+									.on("mouseenter", function(e){
+										$(modalSelector + " .modal-body-right img").attr("src", e.target.src);
+										// reset all
+										$(modalSelector + " .modal-body-left img").css("border", "1px solid #ddd");
+										// edit selected
+										$(e.target).css("border", "5px solid #999");
+									});
+							    });
+							});
 						});
 					},
 					dataType : "json"
@@ -130,6 +150,8 @@ $(function() {
 				}).always(function(){
 					spinnerOff();
 				});
+		
+		
 	};
 
 	start(JSON.stringify({
@@ -161,7 +183,7 @@ $(function() {
 			}));
 		}
 	};
-
+	
 	button = function(id, clazz, icon) {
 		var b = $("<a />", {
 			id: id,

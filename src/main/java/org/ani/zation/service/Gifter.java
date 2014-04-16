@@ -76,7 +76,7 @@ public class Gifter {
 				public RecommendationDTO call() throws Exception {
 					List<? extends GiftItem> searchResult = giftItemSearchingService.search(r.getGift());
 					for (GiftItem giftItem : searchResult) {
-						e.getItems().add(new GiftItemDTO(giftItem.getTitle(), giftItem.getImages().get(0), giftItem.getExternalURL()));
+						e.getItems().add(new GiftItemDTO(giftItem.getTitle(), giftItem.getImages(), giftItem.getExternalURL()));
 					}
 					return e;
 				}
