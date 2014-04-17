@@ -42,6 +42,45 @@ $(function() {
 		});
 	};
 	
+	turnOnModal = function(e, item){
+		e.preventDefault();
+		if ($(e.target).is('.likeButton')) {
+			console.log("false");
+			return false;
+		} else {
+			console.log("true")
+			console.log($(e.target));
+			console.log($(e.currentTarget))
+		}
+		var modalSelector = '#' + item.id + " .detailBox"; 
+		var modal = $(modalSelector);
+		modal.modal('show', {keyboard: true});
+		modal.on('shown.bs.modal', function() {
+			$.each(item.items[0].images, function(index, image) {
+				var img = $("<img />", {
+					src: image
+				});
+				img.appendTo($(modalSelector + " .modal-body-left"));
+				if(index == 0) {
+					img.addClass("first");
+					$(modalSelector + " .modal-body-right img").attr("src", image);
+					$(modalSelector + " .modal-body-left .first").css("border", "5px solid #999");
+					
+//					$(modalSelector + " .modal-body-right").empty();
+//					$(modalSelector + " .modal-body-right").append(zoom(image));
+				}
+			});
+			$(modalSelector + " .modal-body-left img")
+			.on("mouseenter", function(e){
+				$(modalSelector + " .modal-body-right img").attr("src", e.target.src);
+				// reset all
+				$(modalSelector + " .modal-body-left img").css("border", "1px solid #ddd");
+				// edit selected
+				$(e.target).css("border", "5px solid #999");
+			});
+	    });
+	};
+	
 	spinnerOn = function(){
 		$("#spinner").show();
 		$("#more-button").toggle();
@@ -94,53 +133,30 @@ $(function() {
 							
 							detailModal(item).appendTo('#' + item.id);
 							
-							$('<div/>', {class: "item-main-image-box"}).append($('<img/>', {
+							$('<div/>', {class: "item-main-image-box"})
+							.append(button("yes-" + item.id, "rateBoxElem", "ok"))
+							.append($('<img/>', {
 								src : image,
 								alt : title,
 								lowsrc: "../images/spinner.gif"
-							})).appendTo('#' + item.id);
+							}))
+							.appendTo('#' + item.id)
+							.on("click", function(e) { turnOnModal(e, item);});
 							
 							$('<div/>', { class : "rateBox" }).appendTo('#' + item.id);
 
-							var goodRecommendationButton = button("yes-" + item.id, "rateBoxElem", "ok"); 
+//							var goodRecommendationButton = button("yes-" + item.id, "rateBoxElem", "ok"); 
 									
-							$('#' + item.id + " .rateBox").append(goodRecommendationButton);
+//							$('#' + item.id + " .rateBox").append(goodRecommendationButton);
 							
 							$("#" + "yes-" + item.id).on("click", function(e) {
+								console.log(e);
+								console.log("in update rate");
 								e.preventDefault();
 								updateRate(e, item.id, index, true);
 							});
 							
-							$('#' + item.id + " a.detail").on("click", function(e){
-								e.preventDefault();
-								var modalSelector = '#' + item.id + " .detailBox"; 
-								var modal = $(modalSelector);
-								modal.modal('show', {keyboard: true});
-								modal.on('shown.bs.modal', function() {
-									$.each(item.items[0].images, function(index, image) {
-										var img = $("<img />", {
-											src: image
-										});
-										img.appendTo($(modalSelector + " .modal-body-left"));
-										if(index == 0) {
-											img.addClass("first");
-											$(modalSelector + " .modal-body-right img").attr("src", image);
-											$(modalSelector + " .modal-body-left .first").css("border", "5px solid #999");
-											
-//											$(modalSelector + " .modal-body-right").empty();
-//											$(modalSelector + " .modal-body-right").append(zoom(image));
-										}
-									});
-									$(modalSelector + " .modal-body-left img")
-									.on("mouseenter", function(e){
-										$(modalSelector + " .modal-body-right img").attr("src", e.target.src);
-										// reset all
-										$(modalSelector + " .modal-body-left img").css("border", "1px solid #ddd");
-										// edit selected
-										$(e.target).css("border", "5px solid #999");
-									});
-							    });
-							});
+							$('#' + item.id + " a.detail").on("click", function(e) { turnOnModal(e, item);});
 						});
 					},
 					dataType : "json"
@@ -160,19 +176,18 @@ $(function() {
 
 	updateRate = function(event, itemId, index, score) {
 
-		if ($.inArray(index, toRate) > -1) {
-			toRate.splice(toRate.indexOf(index), 1);
-		}
 		message[index].userScore = score;
 
-		var color = score ? "success" : "danger";
-		var otherColor = score ? "danger" : "success";
-		console.log($(event.delegateTarget));
-		$(event.delegateTarget).addClass("btn-" + color);
-
-		var otherButton = score ? "no" : "yes";
-		$("#" + otherButton + "-" + itemId).removeClass("btn-" + otherColor)
-				.addClass("btn-default");
+		var button = $("#yes-" + itemId);
+		var likeClass = "btn-success";
+		var defaultClass = "btn-default";
+		if(button.hasClass('btn-success')) {
+			toRate.push(index);
+			button.removeClass(likeClass).addClass(defaultClass);
+		} else {
+			toRate.splice(toRate.indexOf(index), 1);
+			button.removeClass(defaultClass).addClass(likeClass);
+		}
 
 		if (toRate.length === 0) {
 			console.log(JSON.stringify({
@@ -187,11 +202,11 @@ $(function() {
 	button = function(id, clazz, icon) {
 		var b = $("<a />", {
 			id: id,
-			class: "btn-default btn-lg " + clazz + " button-"+icon,
+			class: "btn-default btn-lg " + clazz + " likeButton button-"+icon,
 			"role": "button"
 		});
 		var img = $("<span />", {
-			class: "glyphicon glyphicon-" + icon
+			class: "glyphicon glyphicon-" + icon + " likeButton"
 		});
 		b.append(img);
 		return b;
