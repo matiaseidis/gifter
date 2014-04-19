@@ -49,9 +49,10 @@
 	</div>
 
 <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
-<script type="text/javascript" src="js/chico.min.js"></script>
+<!-- <script type="text/javascript" src="js/chico.min.js"></script> -->
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/carousel.js"></script>
 <script type="text/javascript" src="js/modal.js"></script>
 </body>
 

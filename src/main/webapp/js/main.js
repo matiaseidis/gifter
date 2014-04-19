@@ -2,6 +2,7 @@ $(function() {
 	
 	message = {};
 	toRate = [];
+	modalRendered = [];
 	url = "/service/gifter/recommendation";
 	
 	zoom = function(image){
@@ -42,45 +43,6 @@ $(function() {
 		});
 	};
 	
-	turnOnModal = function(e, item){
-		e.preventDefault();
-		if ($(e.target).is('.likeButton')) {
-			console.log("false");
-			return false;
-		} else {
-			console.log("true")
-			console.log($(e.target));
-			console.log($(e.currentTarget))
-		}
-		var modalSelector = '#' + item.id + " .detailBox"; 
-		var modal = $(modalSelector);
-		modal.modal('show', {keyboard: true});
-		modal.on('shown.bs.modal', function() {
-			$.each(item.items[0].images, function(index, image) {
-				var img = $("<img />", {
-					src: image
-				});
-				img.appendTo($(modalSelector + " .modal-body-left"));
-				if(index == 0) {
-					img.addClass("first");
-					$(modalSelector + " .modal-body-right img").attr("src", image);
-					$(modalSelector + " .modal-body-left .first").css("border", "5px solid #999");
-					
-//					$(modalSelector + " .modal-body-right").empty();
-//					$(modalSelector + " .modal-body-right").append(zoom(image));
-				}
-			});
-			$(modalSelector + " .modal-body-left img")
-			.on("mouseenter", function(e){
-				$(modalSelector + " .modal-body-right img").attr("src", e.target.src);
-				// reset all
-				$(modalSelector + " .modal-body-left img").css("border", "1px solid #ddd");
-				// edit selected
-				$(e.target).css("border", "5px solid #999");
-			});
-	    });
-	};
-	
 	spinnerOn = function(){
 		$("#spinner").show();
 		$("#more-button").toggle();
@@ -94,6 +56,7 @@ $(function() {
 	start = function(r) {
 		spinnerOn();
 		toRate = [];
+		modalRendered = [];
 		$.ajax(
 				{
 					type : "POST",
@@ -120,8 +83,6 @@ $(function() {
 							var itemCategoryBox = $('<div/>', {
 								class: "item-category-box"
 							});
-							breadcrumb(title, itemCategoryBox);
-							itemCategoryBox.appendTo('#' + item.id);
 
 							$('<div/>', {class: "item-title-box"})
 							.append($('<a />', {
@@ -141,13 +102,12 @@ $(function() {
 								lowsrc: "../images/spinner.gif"
 							}))
 							.appendTo('#' + item.id)
-							.on("click", function(e) { turnOnModal(e, item);});
+							.on("click", function(e) { turnOnModal(e, item, index);});
 							
 							$('<div/>', { class : "rateBox" }).appendTo('#' + item.id);
 
-//							var goodRecommendationButton = button("yes-" + item.id, "rateBoxElem", "ok"); 
-									
-//							$('#' + item.id + " .rateBox").append(goodRecommendationButton);
+							breadcrumb(title, itemCategoryBox);
+							itemCategoryBox.appendTo('#' + item.id);
 							
 							$("#" + "yes-" + item.id).on("click", function(e) {
 								console.log(e);
@@ -156,7 +116,7 @@ $(function() {
 								updateRate(e, item.id, index, true);
 							});
 							
-							$('#' + item.id + " a.detail").on("click", function(e) { turnOnModal(e, item);});
+							$('#' + item.id + " a.detail").on("click", function(e) { turnOnModal(e, item, index);});
 						});
 					},
 					dataType : "json"
@@ -166,8 +126,6 @@ $(function() {
 				}).always(function(){
 					spinnerOff();
 				});
-		
-		
 	};
 
 	start(JSON.stringify({

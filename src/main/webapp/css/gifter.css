@@ -32,7 +32,9 @@ h1 {
 
 .item-box {}
 
-.item-category-box {}
+.item-category-box {
+	margin: 5px 0 0 0;
+}
 
 .item-category-box span {	
 	margin: 0 0 3px 0;
@@ -71,9 +73,9 @@ border: 1px solid #CCC;
 }
 
 .rateBox {
-	margin-top: 25px;
-	margin-bottom: 20px;
-	text-align: center;
+/* 	margin-top: 25px; */
+/* 	margin-bottom: 20px; */
+/* 	text-align: center; */
 }
 .rateBox span {
 	
@@ -107,18 +109,19 @@ li.breadcrumb-item-first a {
 	padding: 0 0 0 10px !important;
 }
 
-.modal-body-left img {
+.modal-body-up img {
 	width: 80px;
-	margin-bottom:5px;
+	margin: 5px;
 	border: 1px solid #ddd;
 	padding: 1px;
+	float: left;
 }
-.modal-body-right img {
+.modal-body-down img {
 	max-width: 100%;
 	border: 1px solid #ddd;
 }
-.modal-body-left {}
-.modal-body-right {
+.modal-body-up {}
+.modal-body-down {
 	text-align: center;
 }
 .modal-footer {
@@ -146,4 +149,9 @@ li.breadcrumb-item-first a {
 }
 .ok-button {
 	
+}
+
+.ch-carousel-content li {
+ 	width: 80px;
+/*  	height: 80px; */
 }
