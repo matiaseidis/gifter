@@ -15,6 +15,8 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <!-- Optional theme -->
 <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+<!-- <link rel="stylesheet" href="css/bootstrap-modal-carousel.min.css"> -->
 <!-- chico -->
 <link rel="stylesheet" href="css/chico.min.css" />
 <!-- Latest compiled and minified JavaScript -->
@@ -51,9 +53,10 @@
 <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
 <!-- <script type="text/javascript" src="js/chico.min.js"></script> -->
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- <script type="text/javascript" src="js/bootstrap-modal-carousel.min.js"></script> -->
 <script type="text/javascript" src="js/main.js"></script>
-<script type="text/javascript" src="js/carousel.js"></script>
 <script type="text/javascript" src="js/modal.js"></script>
+<script type="text/javascript" src="js/carousel.js"></script>
 </body>
 
 

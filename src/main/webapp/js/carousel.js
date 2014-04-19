@@ -1,68 +1,90 @@
 $(function(){
 	
+	$.carouselItem = function(from, to, images, modalSelector) {
+		var item = $("<div />", {class:"item"});
+//		var itemInner = $("<div />", {class:"itemInner"});
+		
+		if(from == 0) {
+			item.addClass("active");
+		}
+		for(var i = from; i<to; i++) {
+			var img = $("<img />", {src:images[i]});
+			if(i == 0) {
+				img.addClass("first");
+				$(modalSelector + " .modal-body-down img").attr("src", images[i]);
+				$(modalSelector + " .modal-body-up .first").css("border", "5px solid #999");
+			}
+			item.append(img);
+		};
+//		item.append(itemInner);
+		item.append($("<div />", {class:"carousel-caption"}).append($("<h3 />", {text: "sarasaq"})));
+		return item;
+	};
+	
 	buildCarousel = function(item, modalSelector){
-		var root = $("<div />", {class:"carousel slide", "data-ride":"carousel"
-				});
+		var root = $("<div />", {
+			class:"carousel slide", 
+			"data-ride":"carousel",
+			id: "#carousel-"+item.id });
 		var body = $("<div />", {class:"carousel-inner"});
 
+		var carouselItemSize = 1;
 		
-		var carouselItem = $("<div />", {class:"item, active"});
-		$.each(item.items[0].images, function(index, image) {
+		if(item.items[0].images.length <= carouselItemSize) {
+			console.log("A apending form " + 0 + " to " + item.items[0].images.length + " of " + item.items[0].images.length);
+			body.append($.carouselItem(0, item.items[0].images.length, item.items[0].images, modalSelector));
+		} else {
+			var rest = Math.floor(item.items[0].images.length % carouselItemSize);
+			var completeCarouselItems = Math.floor(item.items[0].images.length / carouselItemSize);
+			console.log("completeCarouselItems: " + completeCarouselItems)
+			for(var i = 0; i < completeCarouselItems; i++) {
+				console.log("B apending form " + (i * carouselItemSize) + " to " + ((i * carouselItemSize) + carouselItemSize) +  " of " + item.items[0].images.length )
+				body.append($.carouselItem(
+						i * carouselItemSize, 
+						(i * carouselItemSize) + carouselItemSize, 
+						item.items[0].images, modalSelector));
+			}
 			
-			
-			
-				
-			
-			console.log(item.items[0].images.length)
-			console.log(item.items[0].images)			
-			
-			var img = $("<img />", {src:image});
-				if(index == 0) {
-					img.addClass("first");
-						$(modalSelector + " .modal-body-down img").attr("src", image);
-					$(modalSelector + " .modal-body-up .first").css("border", "5px solid #999");
-				}
-				if(index != 0 && index+1 % 4 == 0) {
-					console.log("last item")
-					carouselItem = $("<div />", {class:"item"});
-				}
-				console.log("add to item")
-				// carouselItem.append(img);
-				img.appendTo(carouselItem);
-				if(index != 0 &&  index+1 % 4 == 0 || index == item.items[0].images.length -1) {
-					console.log("add to body - last or 4 modulo")
-					body.append(carouselItem);
-				}
+			if(rest != 0) {
+				console.log("C apending form " +(item.items[0].images.length - rest) + " to " + item.items[0].images.length + " of " +item.items[0].images.length )
+				body.append($.carouselItem(
+						item.items[0].images.length - rest, 
+						item.items[0].images.length, 
+						item.items[0].images, modalSelector));
+			}
+		}
 		
-		});
-		
-		
-		$(modalSelector + " .modal-body-up img")
-		.on("mouseenter", function(e){
-			$(modalSelector + " .modal-body-down img").attr("src", e.target.src);
-			// reset all
-			$(modalSelector + " .modal-body-up img").css("border", "1px solid #ddd");
-			// edit selected
-			$(e.target).css("border", "5px solid #999");
-		});
+//		$(modalSelector + " .modal-body-up img")
+//		.on("mouseenter", function(e){
+//			$(modalSelector + " .modal-body-down img").attr("src", e.target.src);
+//			// reset all
+//			$(modalSelector + " .modal-body-up img").css("border", "1px solid #ddd");
+//			// edit selected
+//			$(e.target).css("border", "5px solid #999");
+//		});
 		
 		root.append(body);
 		var left = $("<a />", {
 			class:"left carousel-control",
-			"data-slide":"prev"})
+			"data-slide":"prev",
+			href: "#carousel-"+item.id})
 			.append($("<span />", {class:"glyphicon glyphicon-chevron-left"}));
 		
 		var right = $("<a />", {
 			class:"right carousel-control",
-			"data-slide":"next"})
+			"data-slide":"next",
+			href: "#carousel-"+item.id})
 			.append($("<span />", {class:"glyphicon glyphicon-chevron-right"}));
 		
 		root.append(left);
 		root.append(right);
 		$(modalSelector + " .modal-body-up").append(root);
-		root.carousel({
-			"interval": false
-		});
+//		$(".container").append(root);
+		$("#carousel-"+item.id).carousel(
+//				{
+//			"interval": false
+//		}
+				);
 	};
 	
 });
