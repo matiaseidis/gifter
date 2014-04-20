@@ -2,7 +2,9 @@ $(function(){
 	
 	$.carouselItem = function(from, to, images, modalSelector) {
 		var item = $("<div />", {class:"item"});
-//		var itemInner = $("<div />", {class:"itemInner"});
+		var itemInnerLeft = $("<div />", {class:"col-md-1"});
+		var itemInnerCenter = $("<div />", {class:"col-md-10"});
+		var itemInnerRight = $("<div />", {class:"col-md-1"});
 		
 		if(from == 0) {
 			item.addClass("active");
@@ -14,10 +16,11 @@ $(function(){
 				$(modalSelector + " .modal-body-down img").attr("src", images[i]);
 				$(modalSelector + " .modal-body-up .first").css("border", "5px solid #999");
 			}
-			item.append(img);
+			itemInnerCenter.append(img);
 		};
-//		item.append(itemInner);
-		item.append($("<div />", {class:"carousel-caption"}).append($("<h3 />", {text: "sarasaq"})));
+		item.append(itemInnerLeft);
+		item.append(itemInnerCenter);
+		item.append(itemInnerRight);
 		return item;
 	};
 	
@@ -25,10 +28,11 @@ $(function(){
 		var root = $("<div />", {
 			class:"carousel slide", 
 			"data-ride":"carousel",
-			id: "#carousel-"+item.id });
+			"data-interval": "false",
+			id: "carousel-"+item.id });
 		var body = $("<div />", {class:"carousel-inner"});
 
-		var carouselItemSize = 1;
+		var carouselItemSize = 4;
 		
 		if(item.items[0].images.length <= carouselItemSize) {
 			console.log("A apending form " + 0 + " to " + item.items[0].images.length + " of " + item.items[0].images.length);
@@ -36,9 +40,13 @@ $(function(){
 		} else {
 			var rest = Math.floor(item.items[0].images.length % carouselItemSize);
 			var completeCarouselItems = Math.floor(item.items[0].images.length / carouselItemSize);
-			console.log("completeCarouselItems: " + completeCarouselItems)
+			
+			console.log("completeCarouselItems: " + completeCarouselItems);
+			
 			for(var i = 0; i < completeCarouselItems; i++) {
-				console.log("B apending form " + (i * carouselItemSize) + " to " + ((i * carouselItemSize) + carouselItemSize) +  " of " + item.items[0].images.length )
+				
+				console.log("B apending form " + (i * carouselItemSize) + " to " + ((i * carouselItemSize) + carouselItemSize) +  " of " + item.items[0].images.length );
+				
 				body.append($.carouselItem(
 						i * carouselItemSize, 
 						(i * carouselItemSize) + carouselItemSize, 
@@ -46,7 +54,9 @@ $(function(){
 			}
 			
 			if(rest != 0) {
-				console.log("C apending form " +(item.items[0].images.length - rest) + " to " + item.items[0].images.length + " of " +item.items[0].images.length )
+			
+				console.log("C apending form " +(item.items[0].images.length - rest) + " to " + item.items[0].images.length + " of " +item.items[0].images.length );
+				
 				body.append($.carouselItem(
 						item.items[0].images.length - rest, 
 						item.items[0].images.length, 
@@ -54,14 +64,14 @@ $(function(){
 			}
 		}
 		
-//		$(modalSelector + " .modal-body-up img")
-//		.on("mouseenter", function(e){
-//			$(modalSelector + " .modal-body-down img").attr("src", e.target.src);
-//			// reset all
-//			$(modalSelector + " .modal-body-up img").css("border", "1px solid #ddd");
-//			// edit selected
-//			$(e.target).css("border", "5px solid #999");
-//		});
+		$(modalSelector + " .modal-body-up img")
+		.on("mouseenter", function(e){
+			$(modalSelector + " .modal-body-down img").attr("src", e.target.src);
+			// reset all
+			$(modalSelector + " .modal-body-up img").css("border", "1px solid #ddd");
+			// edit selected
+			$(e.target).css("border", "5px solid #999");
+		});
 		
 		root.append(body);
 		var left = $("<a />", {
@@ -80,11 +90,11 @@ $(function(){
 		root.append(right);
 		$(modalSelector + " .modal-body-up").append(root);
 //		$(".container").append(root);
-		$("#carousel-"+item.id).carousel(
+//		$("#carousel-"+item.id).carousel(
 //				{
 //			"interval": false
 //		}
-				);
+//				);
 	};
 	
 });

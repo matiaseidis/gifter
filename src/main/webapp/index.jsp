@@ -29,7 +29,7 @@
 	<div class="container">
 	
 	<div id="upperBox" class="row">
-			<a id="more-button" class="btn btn-primary btn-lg" role="button">Mas recomendaciónes</a>
+			<a id="more-button" class="btn btn-primary btn-lg" role="button">Mas recomendaciï¿½nes</a>
 		</div>
 <!-- 	<a href="http://static.mlstatic.com/org-img/ch/ui/1.0.0/static/html5-logo-big.png" target="_blank" class="zoom ch-shownby-pointerenter ch-zoom-trigger lalala" aria-owns="ch-zoom-33" aria-haspopup="true" data-side="right" data-align="top" style="width: 128px; height: 128px;"> -->
 <!-- 	<img src="http://static.mlstatic.com/org-img/ch/ui/1.0.0/static/html5-logo-medium.png" alt="HTML5"> -->
@@ -44,7 +44,8 @@
 		</div>
 
 		<h1>Gifter</h1>
-		
+
+	
 		<div id="mainBox" class="row"></div>
 		<div id="lowerBox" class="row"></div>
 

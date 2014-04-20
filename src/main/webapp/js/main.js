@@ -1,5 +1,20 @@
 $(function() {
 	
+//	$('.carousel').carousel();
+//	$('#carousel-MLA53938 .carousel').carousel();
+//			{
+//		"interval": false
+//	}
+//			);
+//	$('#carousel-MLA53938 a.left').click(function(e) {
+//		  $('#carousel-MLA53938').carousel('prev');
+//		});
+//
+//		$('#carousel-MLA53938 a.right').on('click', function(e) {
+//			console.log("click")
+//		  $('#carousel-MLA53938').carousel('next');
+//		});
+	
 	message = {};
 	toRate = [];
 	modalRendered = [];

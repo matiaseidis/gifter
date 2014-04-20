@@ -110,7 +110,8 @@ li.breadcrumb-item-first a {
 }
 
 .modal-body-up img {
-	width: 80px;
+/* 	width: 80px; */
+	max-height: 80px;
 	margin: 5px;
 	border: 1px solid #ddd;
 	padding: 1px;
@@ -120,7 +121,10 @@ li.breadcrumb-item-first a {
 	max-width: 100%;
 	border: 1px solid #ddd;
 }
-.modal-body-up {}
+.modal-body-up {
+	margin: 0 0 10px 0;
+	min-height: 86px;
+}
 .modal-body-down {
 	text-align: center;
 }
@@ -154,4 +158,13 @@ li.breadcrumb-item-first a {
 .ch-carousel-content li {
  	width: 80px;
 /*  	height: 80px; */
+}
+.carousel-inner>.item>img {
+	
+}
+.carousel-control {
+	background-image: none !important;
+}
+.carousel-control span {
+	font-size:20px;
 }
