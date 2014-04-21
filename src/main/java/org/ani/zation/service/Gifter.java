@@ -43,6 +43,8 @@ public class Gifter {
 		System.out.println("SCORE: " + input.toString());
 
 		Map<String, RecommendationDTO> userScore = new HashMap<String, RecommendationDTO>();
+		List<String> filters = new ArrayList<String>();
+		
 		try {
 			JSONArray scores = input.getJSONArray("scores");
 			System.out.println(scores.length());
@@ -53,13 +55,21 @@ public class Gifter {
 					userScore.put(recommendationDTO.getId(), recommendationDTO);
 				}
 			}
+			JSONArray jFilters = input.getJSONArray("filters");
+			if (jFilters.length() > 0) {
+				for (int i = 0; i < jFilters.length(); i++) {
+					String filter = jFilters.getString(i);
+					filters.add(filter);
+				}
+			}
 		} catch (JSONException e) {
 			return Response.status(400).entity("Invalid input").build();
 		}
+
 		HttpSession session = httpRequest.getSession(true);
 		GifterSession gs = (GifterSession) session.getAttribute("gifter");
 		final GiftItemSearchingService giftItemSearchingService = (GiftItemSearchingService) session.getServletContext().getAttribute("searchingService");
-		Set<GiftRecommendation<CanonicalCategory>> recommended = gs.recommend(userScore);
+		Set<GiftRecommendation<CanonicalCategory>> recommended = gs.recommend(userScore, filters);
 		List<RecommendationDTO> resp = new ArrayList<RecommendationDTO>();
 
 		ExecutorService execPool = (ExecutorService) context.getAttribute("execPool");

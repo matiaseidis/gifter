@@ -7,9 +7,6 @@ $(function(){
 		var dialog = $('<div/>', { class : "modal-dialog"});
 		var header = $('<div/>', { class : "modal-header"});
 		var body = $('<div/>', { class : "modal-body row"});
-//		var bodyLeft = $('<div/>', { class : "modal-body-up col-md-12 ch-carousel ch-carousel-mask"});
-//		var bodyLeft = $('<div/>', { class : "modal-body-up col-md-12"});
-//		var bodyRight = $('<div/>', { class : "modal-body-down col-md-12"});
 		var bodyLeft = $('<div/>', { class : "modal-body-up"});
 		var bodyRight = $('<div/>', { class : "modal-body-down"});
 		var footer = $('<div/>', { class : "modal-footer"});

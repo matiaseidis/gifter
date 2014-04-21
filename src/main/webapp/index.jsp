@@ -29,22 +29,35 @@
 	<div class="container">
 	
 	<div id="upperBox" class="row">
-			<a id="more-button" class="btn btn-primary btn-lg" role="button">Mas recomendaciï¿½nes</a>
+	<div class="col-md-4 filters">
+				<div class="panel">
+					<div class="panel-heading">
+					  <div class="checkbox"><label><input type="checkbox" name="filterByBaby" value="baby" checked="checked" />Bebé</label></div>
+					  <div class="checkbox"><label><input type="checkbox" name="filterByGirl"  checked="checked" value="girl" />Niña</label></div>
+					  <div class="checkbox"><label><input type="checkbox" name="filterByBoy"  checked="checked" value="boy" />Niño</label></div>
+					  <div class="checkbox"><label><input type="checkbox" name="filterByFemale"  checked="checked" value="female" />Mujer</label></div>
+					  <div class="checkbox"><label><input type="checkbox" name="filterByMale"  checked="checked" value="male" />Hombre</label></div>
+				    </div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<h1>Gifter</h1>
+			</div>
+			<div class="col-md-4">
+				<a id="more-button" class="btn btn-primary btn-lg" role="button">Mas recomendaciónes</a>
+			</div>
+			
 		</div>
-<!-- 	<a href="http://static.mlstatic.com/org-img/ch/ui/1.0.0/static/html5-logo-big.png" target="_blank" class="zoom ch-shownby-pointerenter ch-zoom-trigger lalala" aria-owns="ch-zoom-33" aria-haspopup="true" data-side="right" data-align="top" style="width: 128px; height: 128px;"> -->
-<!-- 	<img src="http://static.mlstatic.com/org-img/ch/ui/1.0.0/static/html5-logo-medium.png" alt="HTML5"> -->
-<!-- 	<div class="ch-zoom-seeker ch-hide" style="width: 75px; height: 75px; left: 30.5px; top: 0px;"></div> -->
-<!-- 	</a> -->
+
+
+
 
 		<div id="spinner">
-			<h1>Gifter</h1>
-			<div id="spinner-inner">
-				<img id="thinking" src="images/thinking.jpg">
-			</div>
-		</div>
-
 		<h1>Gifter</h1>
-
+				<div id="spinner-inner">
+					<img id="thinking" src="images/thinking.jpg">
+				</div>
+		</div>
 	
 		<div id="mainBox" class="row"></div>
 		<div id="lowerBox" class="row"></div>

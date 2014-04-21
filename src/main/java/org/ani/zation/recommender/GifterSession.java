@@ -30,7 +30,7 @@ public class GifterSession {
 		this.recommender = recommender;
 	}
 
-	public Set<GiftRecommendation<CanonicalCategory>> recommend(Map<String, RecommendationDTO> news) {
+	public Set<GiftRecommendation<CanonicalCategory>> recommend(Map<String, RecommendationDTO> news, List<String> filters) {
 
 		if (!news.isEmpty()) {
 			for (GiftRecommendation<CanonicalCategory> pending : toRate) {
@@ -42,12 +42,10 @@ public class GifterSession {
 		} else {
 			System.out.println("news is empty");
 		}
-
-		this.recommender.filterGifts(new MLTagsPredicate("baby"));
-		this.recommender.filterGifts(new MLTagsPredicate("girl"));
-		this.recommender.filterGifts(new MLTagsPredicate("female"));
-		this.recommender.filterGifts(new MLTagsPredicate("boy"));
-		this.recommender.filterGifts(new MLTagsPredicate("male"));
+		
+		for(String filter: filters) {
+			this.recommender.filterGifts(new MLTagsPredicate(filter));
+		}
 		
 		Set<GiftRecommendation<CanonicalCategory>> recommend = this.recommender.recommend(rated, nRecommendations);
 		this.toRate = Lists.newArrayList(recommend);

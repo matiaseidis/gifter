@@ -1,23 +1,9 @@
 $(function() {
 	
-//	$('.carousel').carousel();
-//	$('#carousel-MLA53938 .carousel').carousel();
-//			{
-//		"interval": false
-//	}
-//			);
-//	$('#carousel-MLA53938 a.left').click(function(e) {
-//		  $('#carousel-MLA53938').carousel('prev');
-//		});
-//
-//		$('#carousel-MLA53938 a.right').on('click', function(e) {
-//			console.log("click")
-//		  $('#carousel-MLA53938').carousel('next');
-//		});
-	
 	message = {};
 	toRate = [];
 	modalRendered = [];
+	filters = ["baby", "girl", "female", "boy", "male"];
 	url = "/service/gifter/recommendation";
 	
 	zoom = function(image){
@@ -60,11 +46,13 @@ $(function() {
 	
 	spinnerOn = function(){
 		$("#spinner").show();
+		$("#upperBox").hide();
 		$("#more-button").toggle();
 	};
 	
 	spinnerOff = function(){
 		$("#spinner").hide();
+		$("#upperBox").show();
 		$("#more-button").toggle();
 	};
 	
@@ -144,7 +132,8 @@ $(function() {
 	};
 
 	start(JSON.stringify({
-		scores : []
+		scores : [],
+		filters : filters
 	}));
 
 	updateRate = function(event, itemId, index, score) {
@@ -164,10 +153,12 @@ $(function() {
 
 		if (toRate.length === 0) {
 			console.log(JSON.stringify({
-				scores : message
+				scores : message,
+				filters : filters
 			}));
 			start(JSON.stringify({
-				scores : message
+				scores : message,
+				filters : filters
 			}));
 		}
 	};
@@ -187,8 +178,18 @@ $(function() {
 	
 	$("#more-button").on("click", function(){
 		start(JSON.stringify({
-			scores : message
+			scores : message,
+			filters : filters
 		}));
+	});
+	
+	$(".panel .checkbox input").on("change", function(e){
+		var filter = $(e.target).val(); 
+		if($(e.target).is(':checked')) {
+			filters.push(filter);
+		} else {
+			filters.splice(filters.indexOf(filter), 1);
+		}
 	});
 
 });
