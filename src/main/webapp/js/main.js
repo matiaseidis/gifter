@@ -46,13 +46,13 @@ $(function() {
 	
 	spinnerOn = function(){
 		$("#spinner").show();
-		$("#upperBox").hide();
+		$(".filters").toggle();
 		$("#more-button").toggle();
 	};
 	
 	spinnerOff = function(){
 		$("#spinner").hide();
-		$("#upperBox").show();
+		$(".filters").toggle();
 		$("#more-button").toggle();
 	};
 	

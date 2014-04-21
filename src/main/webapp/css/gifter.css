@@ -102,7 +102,9 @@ span.label-white {
 .filters {
 	text-align: left;
 }
-
+#more-button {
+	margin-top: 15%;
+}
 input.breadcrumb-item {
 	margin: 0 3px 3px 0;
 }

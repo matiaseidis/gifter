@@ -14,7 +14,7 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <!-- Optional theme -->
-<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<!-- <link rel="stylesheet" href="css/bootstrap-theme.min.css"> -->
 
 <!-- <link rel="stylesheet" href="css/bootstrap-modal-carousel.min.css"> -->
 <!-- chico -->
@@ -27,11 +27,25 @@
 
 
 	<div class="container">
+
+<div id="spinner">
+		<h1>Gifter</h1>
+				<div id="spinner-inner">
+					<img id="thinking" src="images/thinking.jpg">
+				</div>
+		</div>
 	
 	<div id="upperBox" class="row">
-	<div class="col-md-4 filters">
+	<div class="col-md-4">
+	<div class="filters">
 				<div class="panel">
 					<div class="panel-heading">
+  						<!--  test -->
+  						<span class="glyphicon glyphicon-eye-open"></span> Test eye open<br />
+  						<span class="glyphicon glyphicon-eye-close"></span> Test eye close
+						<span class="glyphicon glyphicon-thumbs-up"></span> Test thumb up<br />
+						<span class="glyphicon glyphicon-thumbs-down"></span> Test thumb down<br />
+
 					  <div class="checkbox"><label><input type="checkbox" name="filterByBaby" value="baby" checked="checked" />Bebé</label></div>
 					  <div class="checkbox"><label><input type="checkbox" name="filterByGirl"  checked="checked" value="girl" />Niña</label></div>
 					  <div class="checkbox"><label><input type="checkbox" name="filterByBoy"  checked="checked" value="boy" />Niño</label></div>
@@ -40,25 +54,16 @@
 				    </div>
 				</div>
 			</div>
+			</div>
 			<div class="col-md-4">
 				<h1>Gifter</h1>
 			</div>
 			<div class="col-md-4">
-				<a id="more-button" class="btn btn-primary btn-lg" role="button">Mas recomendaciónes</a>
+				<a id="more-button" class="btn btn-primary btn-lg" role="button">Más<br /> recomendaciónes</a>
 			</div>
 			
 		</div>
 
-
-
-
-		<div id="spinner">
-		<h1>Gifter</h1>
-				<div id="spinner-inner">
-					<img id="thinking" src="images/thinking.jpg">
-				</div>
-		</div>
-	
 		<div id="mainBox" class="row"></div>
 		<div id="lowerBox" class="row"></div>
 
