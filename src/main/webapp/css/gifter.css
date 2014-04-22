@@ -102,6 +102,12 @@ span.label-white {
 .filters {
 	text-align: left;
 }
+.filter {
+	margin: 0 0 5px 0;
+}
+.filter span {
+	margin: 0 3px 0 0;
+}
 #more-button {
 	margin-top: 15%;
 }
