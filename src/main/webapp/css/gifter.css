@@ -68,25 +68,31 @@ h1 {
 .item-main-image-box {
 	min-height: 100px;
 	text-align: center;
+	border-bottom: 1px solid #E2E2E2;
+	padding: 20px 0 20px 0;
+	border-top: 1px solid #E2E2E2;
 }
 .item-main-image-box img {
 	max-width: 100%;
 	cursor: pointer;
+	border-radius: 3px;
+	border: 1px solid #EDEDED;
+	
 }
 .item-main-image-box .button-ok {
 	position: absolute;
-width: 50px;
-right: 20px;
-margin-top: 3px;
+	width: 50px;
+	right: 20px;
+	margin-top: 3px;
+	opacity: 0.8;
 }
 #mainBox .center {
-border-left: 1px solid #999;
-border-right: 1px solid #999;
-margin-left: 0;
-margin-right: 0;
-padding-left: 2%;
-padding-right: 2%;
-	
+	border-left: 1px solid #CCC;
+	border-right: 1px solid #CCC;
+	margin-left: 0;
+	margin-right: 0;
+	padding-left: 2%;
+	padding-right: 2%;
 }
 .rateBox {
 /* 	margin-top: 25px; */

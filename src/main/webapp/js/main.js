@@ -93,13 +93,13 @@ $(function() {
 	};
 	
 	spinnerOn = function(){
-		$("#spinner").show();
+		$("#spinner").fadeIn("fast");
 		$(".filters").toggle();
 		$("#more-button").toggle();
 	};
 	
 	spinnerOff = function(){
-		$("#spinner").hide();
+		$("#spinner").fadeOut("fast");
 		$(".filters").toggle();
 		$("#more-button").toggle();
 	};
