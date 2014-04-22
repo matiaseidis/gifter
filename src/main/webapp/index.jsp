@@ -18,7 +18,7 @@
 
 <!-- <link rel="stylesheet" href="css/bootstrap-modal-carousel.min.css"> -->
 <!-- chico -->
-<link rel="stylesheet" href="css/chico.min.css" />
+<!-- <link rel="stylesheet" href="css/chico.min.css" /> -->
 <!-- Latest compiled and minified JavaScript -->
 <link rel="stylesheet" href="css/gifter.css">
 
@@ -40,16 +40,33 @@
 	<div class="filters">
 				<div class="panel">
 					<div class="panel-heading">
-  						<!--  test -->
   						
-<!--   						<div class="btn-group"> -->
-						  <button class="btn btn-success btn-xs filter" type="button" value="baby" ><span class="glyphicon glyphicon-thumbs-up"></span>Bebé</button><br />
-						  <button class="btn btn-success btn-xs filter" type="button" value="girl" ><span class="glyphicon glyphicon-thumbs-up"></span>Niña</button><br />
-						  <button class="btn btn-success btn-xs filter" type="button" value="boy" ><span class="glyphicon glyphicon-thumbs-up"></span>Niño</button><br />
-						  <button class="btn btn-success btn-xs filter" type="button" value="female" ><span class="glyphicon glyphicon-thumbs-up"></span>Mujer</button><br />
-						  <button class="btn btn-success btn-xs filter" type="button" value="male" ><span class="glyphicon glyphicon-thumbs-up"></span>Hombre</button>
- 
-<!-- 						  <button class="btn btn-disabled btn-xs" type="button"> -->
+							<button class="btn btn-success btn-xs filter" type="button"
+								value="baby">
+								<span class="glyphicon glyphicon-thumbs-up"></span>Bebé
+							</button>
+							<br />
+							<button class="btn btn-success btn-xs filter" type="button"
+								value="girl">
+								<span class="glyphicon glyphicon-thumbs-up"></span>Niña
+							</button>
+							<br />
+							<button class="btn btn-success btn-xs filter" type="button"
+								value="boy">
+								<span class="glyphicon glyphicon-thumbs-up"></span>Niño
+							</button>
+							<br />
+							<button class="btn btn-success btn-xs filter" type="button"
+								value="female">
+								<span class="glyphicon glyphicon-thumbs-up"></span>Mujer
+							</button>
+							<br />
+							<button class="btn btn-success btn-xs filter" type="button"
+								value="male">
+								<span class="glyphicon glyphicon-thumbs-up"></span>Hombre
+							</button>
+
+							<!-- 						  <button class="btn btn-disabled btn-xs" type="button"> -->
 <!-- 						  	<span class="glyphicon glyphicon-thumbs-down"></span> disabled filter -->
 <!-- 						  </button> -->
 <!--  						</div> --> 

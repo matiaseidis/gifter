@@ -16,31 +16,31 @@ $(function() {
 //	});
 	
 	$(".filter").on("click", function(e){
-//		var filter = $.trim($(e.target).text());
-		var filter = $.trim($(e.target).attr("value"));
-		
-		if($(e.target).hasClass("btn-success")) {
+
+		var elem = $( e.delegateTarget )
+		var filter = $.trim(elem.attr("value"));
+		if(elem.hasClass("btn-success")) {
 			// disable
-			$(e.target).removeClass("btn-success");
-			$(e.target).addClass("btn-disabled");
-			$(e.target).children("span").removeClass("glyphicon-thumbs-up");
-			$(e.target).children("span").addClass("glyphicon-thumbs-down");
+			elem.removeClass("btn-success");
+			elem.addClass("btn-disabled");
+			elem.children("span").removeClass("glyphicon-thumbs-up");
+			elem.children("span").addClass("glyphicon-thumbs-down");
 			
 			filters.splice(filters.indexOf(filter), 1);
 			
 		} else {
 			// enable
-			$(e.target).removeClass("btn-disabled");
-			$(e.target).addClass("btn-success");
-			$(e.target).children("span").removeClass("glyphicon-thumbs-down");
-			$(e.target).children("span").addClass("glyphicon-thumbs-up");
+			elem.removeClass("btn-disabled");
+			elem.addClass("btn-success");
+			elem.children("span").removeClass("glyphicon-thumbs-down");
+			elem.children("span").addClass("glyphicon-thumbs-up");
 			
 			filters.push(filter);
 			
 		}
 		
-		$(e.target).blur();
-		console.log(filters)
+		elem.blur();
+//		console.log(filters)
 	});
 	
 	zoom = function(image){
@@ -72,11 +72,22 @@ $(function() {
 		var splitted = title.split(">");
 		$.each(splitted, function(index, item) {
 			if (index < splitted.length -1) {
-			elem.append($("<input />", {
+				
+			// chico	
+//			elem.append($("<input />", {
+//				type: "button",
+//				value: item,
+//				class: "ch-btn-skin ch-btn-small breadcrumb-item"
+//			}));
+			
+			// bootstrap
+			var b = $("<button />", {
 				type: "button",
-				value: item,
-				class: "ch-btn-skin ch-btn-small breadcrumb-item"
-			}));
+				text: item,
+				class: "btn btn-info btn-xs filter breadcrumb-item"
+			});
+			elem.append(b);
+			
 			}
 		});
 	};

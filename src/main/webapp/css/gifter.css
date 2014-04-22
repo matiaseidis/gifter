@@ -30,18 +30,18 @@ h1 {
 	z-index:9998;
 }
 
-.item-box {}
+/* .item-box {} */
 
 .item-category-box {
-	margin: 5px 0 0 0;
+	margin: 10px 0 0 0;
 }
 
-.item-category-box span {	
-	margin: 0 0 3px 0;
-	padding: 3px;
-	float: left;
-	color: #999;
-}
+/* .item-category-box span {	 */
+/* 	margin: 0 0 3px 0; */
+/* 	padding: 3px; */
+/* 	float: left; */
+/* 	color: #999; */
+/* } */
 .breadcrumb {
 	background-color: #EDEDED;
 }
@@ -111,14 +111,8 @@ span.label-white {
 #more-button {
 	margin-top: 15%;
 }
-input.breadcrumb-item {
+.breadcrumb-item {
 	margin: 0 3px 3px 0;
-}
-li.breadcrumb-item a {
-	padding: 0 0 0 20px;
-}
-li.breadcrumb-item-first a {
-	padding: 0 0 0 10px !important;
 }
 
 .modal-body-up .item img {
