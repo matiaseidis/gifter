@@ -69,14 +69,14 @@ h1 {
 	min-height: 100px;
 	text-align: center;
 	border-bottom: 1px solid #E2E2E2;
-	padding: 20px 0 20px 0;
-	border-top: 1px solid #E2E2E2;
+	padding: 15px 0 20px 0;
+/* 	border-top: 1px solid #E2E2E2; */
 }
 .item-main-image-box img {
 	max-width: 100%;
 	cursor: pointer;
 	border-radius: 3px;
-	border: 1px solid #EDEDED;
+/* 	border: 1px solid #EDEDED; */
 	
 }
 .item-main-image-box .button-ok {
