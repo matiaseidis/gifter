@@ -30,7 +30,13 @@ h1 {
 	z-index:9998;
 }
 
-/* .item-box {} */
+.item-box {
+	width: 30%;
+	margin: 1%;
+	padding: 1%;
+/* 	border: 1px solid #666; */
+/* 	border-radius:5px; */
+}
 
 .item-category-box {
 	margin: 10px 0 0 0;
@@ -64,7 +70,7 @@ h1 {
 	text-align: center;
 }
 .item-main-image-box img {
-	max-width: 350px;
+	max-width: 100%;
 	cursor: pointer;
 }
 .item-main-image-box .button-ok {
@@ -72,9 +78,16 @@ h1 {
 width: 50px;
 right: 20px;
 margin-top: 3px;
-border: 1px solid #CCC;
 }
-
+#mainBox .center {
+border-left: 1px solid #999;
+border-right: 1px solid #999;
+margin-left: 0;
+margin-right: 0;
+padding-left: 2%;
+padding-right: 2%;
+	
+}
 .rateBox {
 /* 	margin-top: 25px; */
 /* 	margin-bottom: 20px; */

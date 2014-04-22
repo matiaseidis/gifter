@@ -84,7 +84,7 @@ $(function() {
 			var b = $("<button />", {
 				type: "button",
 				text: item,
-				class: "btn btn-info btn-xs filter breadcrumb-item"
+				class: "btn btn-default btn-xs filter breadcrumb-item"
 			});
 			elem.append(b);
 			
@@ -125,11 +125,15 @@ $(function() {
 								image = item.items[0].images[0];
 							}
 							toRate.push(index);
-							$('<div/>', {
+							var box = $('<div/>', {
 								id : item.id,
 								// class: "col-xs-6 col-sm-4"
 								class : "item-box col-md-4"
-							}).appendTo('#mainBox');
+							});
+							if(index == 1) {
+								box.addClass("center");
+							}
+							box.appendTo('#mainBox');
 
 							var itemCategoryBox = $('<div/>', {
 								class: "item-category-box"
