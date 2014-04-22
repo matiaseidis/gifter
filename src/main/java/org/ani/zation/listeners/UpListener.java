@@ -39,9 +39,8 @@ public class UpListener implements ServletContextListener {
 			arg0.getServletContext().setAttribute("metric", metric);
 			arg0.getServletContext().setAttribute("giftWeighter", giftWeighter);
 			arg0.getServletContext().setAttribute("searchingService", mlSearchingService);
-			
+
 			arg0.getServletContext().setAttribute("execPool", Executors.newFixedThreadPool(120));
-			
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -59,10 +58,7 @@ public class UpListener implements ServletContextListener {
 
 	private static Collection<CanonicalCategory> mercadoLibreTargetCategories() throws IOException {
 		MLCategoryParser mlCategoryParser = new MLCategoryParser();
-		List<MLCategory> mlCategories = mlCategoryParser
-		// .parseMLCategories("mltest.json");
-				.parseMLCategories();
-		mlCategoryParser.filterAndWeight(mlCategories);
+		List<MLCategory> mlCategories = mlCategoryParser.parseCachedMLCategories();
 
 		Collection<? extends CanonicalCategory> r = mlCategories;
 		return (Collection<CanonicalCategory>) r;
