@@ -41,16 +41,29 @@
 				<div class="panel">
 					<div class="panel-heading">
   						<!--  test -->
-  						<span class="glyphicon glyphicon-eye-open"></span> Test eye open<br />
-  						<span class="glyphicon glyphicon-eye-close"></span> Test eye close
-						<span class="glyphicon glyphicon-thumbs-up"></span> Test thumb up<br />
-						<span class="glyphicon glyphicon-thumbs-down"></span> Test thumb down<br />
+  						
+<!--   						<div class="btn-group"> -->
+						  <button class="btn btn-success btn-xs filter" type="button" value="baby" ><span class="glyphicon glyphicon-thumbs-up"></span>Bebé</button><br />
+						  <button class="btn btn-success btn-xs filter" type="button" value="girl" ><span class="glyphicon glyphicon-thumbs-up"></span>Niña</button><br />
+						  <button class="btn btn-success btn-xs filter" type="button" value="boy" ><span class="glyphicon glyphicon-thumbs-up"></span>Niño</button><br />
+						  <button class="btn btn-success btn-xs filter" type="button" value="female" ><span class="glyphicon glyphicon-thumbs-up"></span>Mujer</button><br />
+						  <button class="btn btn-success btn-xs filter" type="button" value="male" ><span class="glyphicon glyphicon-thumbs-up"></span>Hombre</button>
+ 
+<!-- 						  <button class="btn btn-disabled btn-xs" type="button"> -->
+<!-- 						  	<span class="glyphicon glyphicon-thumbs-down"></span> disabled filter -->
+<!-- 						  </button> -->
+<!--  						</div> --> 
+<!--   						<br /><br /> -->
+<!--   						<span class="glyphicon glyphicon-eye-open"></span> Test eye open<br /> -->
+<!--   						<span class="glyphicon glyphicon-eye-close"></span> Test eye close<br /> -->
+<!-- 						<span class="glyphicon glyphicon-thumbs-up"></span> Test thumb up<br /> -->
+<!-- 						<span class="glyphicon glyphicon-thumbs-down"></span> Test thumb down<br /> -->
 
-					  <div class="checkbox"><label><input type="checkbox" name="filterByBaby" value="baby" checked="checked" />Bebé</label></div>
-					  <div class="checkbox"><label><input type="checkbox" name="filterByGirl"  checked="checked" value="girl" />Niña</label></div>
-					  <div class="checkbox"><label><input type="checkbox" name="filterByBoy"  checked="checked" value="boy" />Niño</label></div>
-					  <div class="checkbox"><label><input type="checkbox" name="filterByFemale"  checked="checked" value="female" />Mujer</label></div>
-					  <div class="checkbox"><label><input type="checkbox" name="filterByMale"  checked="checked" value="male" />Hombre</label></div>
+<!-- 					  <div class="checkbox"><label><input type="checkbox" name="filterByBaby" value="baby" checked="checked" />Bebé</label></div> -->
+<!-- 					  <div class="checkbox"><label><input type="checkbox" name="filterByGirl"  checked="checked" value="girl" />Niña</label></div> -->
+<!-- 					  <div class="checkbox"><label><input type="checkbox" name="filterByBoy"  checked="checked" value="boy" />Niño</label></div> -->
+<!-- 					  <div class="checkbox"><label><input type="checkbox" name="filterByFemale"  checked="checked" value="female" />Mujer</label></div> -->
+<!-- 					  <div class="checkbox"><label><input type="checkbox" name="filterByMale"  checked="checked" value="male" />Hombre</label></div> -->
 				    </div>
 				</div>
 			</div>

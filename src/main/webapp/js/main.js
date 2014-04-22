@@ -6,6 +6,43 @@ $(function() {
 	filters = ["baby", "girl", "female", "boy", "male"];
 	url = "/service/gifter/recommendation";
 	
+//	$(".panel .checkbox input").on("change", function(e){
+//		var filter = $(e.target).val(); 
+//		if($(e.target).is(':checked')) {
+//			filters.push(filter);
+//		} else {
+//			filters.splice(filters.indexOf(filter), 1);
+//		}
+//	});
+	
+	$(".filter").on("click", function(e){
+//		var filter = $.trim($(e.target).text());
+		var filter = $.trim($(e.target).attr("value"));
+		
+		if($(e.target).hasClass("btn-success")) {
+			// disable
+			$(e.target).removeClass("btn-success");
+			$(e.target).addClass("btn-disabled");
+			$(e.target).children("span").removeClass("glyphicon-thumbs-up");
+			$(e.target).children("span").addClass("glyphicon-thumbs-down");
+			
+			filters.splice(filters.indexOf(filter), 1);
+			
+		} else {
+			// enable
+			$(e.target).removeClass("btn-disabled");
+			$(e.target).addClass("btn-success");
+			$(e.target).children("span").removeClass("glyphicon-thumbs-down");
+			$(e.target).children("span").addClass("glyphicon-thumbs-up");
+			
+			filters.push(filter);
+			
+		}
+		
+		$(e.target).blur();
+		console.log(filters)
+	});
+	
 	zoom = function(image){
 		console.log("zoom for " + image);
 		var a = $("<a />", {
@@ -182,14 +219,4 @@ $(function() {
 			filters : filters
 		}));
 	});
-	
-	$(".panel .checkbox input").on("change", function(e){
-		var filter = $(e.target).val(); 
-		if($(e.target).is(':checked')) {
-			filters.push(filter);
-		} else {
-			filters.splice(filters.indexOf(filter), 1);
-		}
-	});
-
 });
