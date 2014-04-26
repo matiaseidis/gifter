@@ -44,7 +44,7 @@ public class Gifter {
 
 		Map<String, RecommendationDTO> userScore = new HashMap<String, RecommendationDTO>();
 		List<String> filters = new ArrayList<String>();
-		
+
 		try {
 			JSONArray scores = input.getJSONArray("scores");
 			System.out.println(scores.length());
@@ -84,7 +84,7 @@ public class Gifter {
 
 				@Override
 				public RecommendationDTO call() throws Exception {
-					List<? extends GiftItem> searchResult = giftItemSearchingService.search(r.getGift());
+					List<? extends GiftItem> searchResult = giftItemSearchingService.search(r.getGift(), 0, 50);
 					for (GiftItem giftItem : searchResult) {
 						e.getItems().add(new GiftItemDTO(giftItem.getTitle(), giftItem.getImages(), giftItem.getExternalURL()));
 					}
