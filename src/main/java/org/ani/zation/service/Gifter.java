@@ -32,6 +32,9 @@ import org.cronopios.regalator.GiftRecommendation;
 @Path("/gifter")
 public class Gifter {
 
+    private double defaultPriceFrom = 0;
+    private double defaultPriceTo = 50;
+
 	@javax.ws.rs.core.Context
 	ServletContext context;
 
@@ -43,7 +46,6 @@ public class Gifter {
 		System.out.println("SCORE: " + input.toString());
 
 		Map<String, RecommendationDTO> userScore = new HashMap<String, RecommendationDTO>();
-		List<String> filters = new ArrayList<String>();
 
 		try {
 			JSONArray scores = input.getJSONArray("scores");
@@ -55,13 +57,28 @@ public class Gifter {
 					userScore.put(recommendationDTO.getId(), recommendationDTO);
 				}
 			}
-			JSONArray jFilters = input.getJSONArray("filters");
-			if (jFilters.length() > 0) {
-				for (int i = 0; i < jFilters.length(); i++) {
-					String filter = jFilters.getString(i);
-					filters.add(filter);
-				}
-			}
+            JSONObject priceRange = input.getJSONObject("priceRange");
+
+            String fromStr = priceRange.getString("from");
+            String toStr = priceRange.getString("to");
+
+            double from = defaultPriceFrom;
+            double to = defaultPriceTo;
+
+            if(!fromStr.isEmpty() && !toStr.isEmpty()) {
+                try {
+                    from = Double.parseDouble(fromStr);
+                    to = Double.parseDouble(toStr);
+                } catch (NumberFormatException nfe) {
+                    System.err.println("problems parsing price from - to. Using defaults: from: ["+defaultPriceFrom+"] and to: ["+defaultPriceTo+"] ");
+                    nfe.printStackTrace();
+                }
+            } else {
+                System.out.println("No values for price from or to provided. Using defaults: from: ["+defaultPriceFrom+"] and to: ["+defaultPriceTo+"] ");
+            }
+
+            System.out.println("price range - from: " + from + " - to: " + to + ". What to do?");
+
 		} catch (JSONException e) {
 			return Response.status(400).entity("Invalid input").build();
 		}
@@ -69,7 +86,7 @@ public class Gifter {
 		HttpSession session = httpRequest.getSession(true);
 		GifterSession gs = (GifterSession) session.getAttribute("gifter");
 		final GiftItemSearchingService giftItemSearchingService = (GiftItemSearchingService) session.getServletContext().getAttribute("searchingService");
-		Set<GiftRecommendation<CanonicalCategory>> recommended = gs.recommend(userScore, filters);
+		Set<GiftRecommendation<CanonicalCategory>> recommended = gs.recommend(userScore);
 		List<RecommendationDTO> resp = new ArrayList<RecommendationDTO>();
 
 		ExecutorService execPool = (ExecutorService) context.getAttribute("execPool");

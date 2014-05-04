@@ -3,10 +3,12 @@ $(function() {
 	message = {};
 	toRate = [];
 	modalRendered = [];
-	filters = ["baby", "girl", "female", "boy", "male"];
+	// filters = ["baby", "girl", "female", "boy", "male"];
 	url = "/service/gifter/recommendation";
 	selectedItemsInitialLeft = $("#selectedItemsBox").css('left');
-	
+	priceRange = {}
+
+	/*
 	$(".filter").on("click", function(e){
 
 		var elem = $( e.delegateTarget )
@@ -30,10 +32,13 @@ $(function() {
 			filters.push(filter);
 			
 		}
+
 		
 		elem.blur();
 	});
-	
+	*/
+
+	/*
 	zoom = function(image){
 		console.log("zoom for " + image);
 		var a = $("<a />", {
@@ -58,6 +63,7 @@ $(function() {
 		new ch.Zoom(a);
 		return a;
 	};
+	*/
 
 	breadcrumb = function(title, elem) {
 		var splitted = title.split(">");
@@ -77,14 +83,17 @@ $(function() {
 	
 	spinnerOn = function(){
 		$("#spinner").fadeIn("fast");
-		$(".filters").toggle();
-		$("#more-button").toggle();
+		// $(".filters").toggle();
+		// $("#more-button").toggle();
+		$(".navbar .container").toggle();
+
 	};
 	
 	spinnerOff = function(){
 		$("#spinner").fadeOut("fast");
-		$(".filters").toggle();
-		$("#more-button").toggle();
+		// $(".filters").toggle();
+		// $("#more-button").toggle();
+		$(".navbar .container").toggle();
 	};
 
 	$.selectedItem = function(id) {
@@ -180,9 +189,19 @@ $(function() {
 				});
 	};
 
+	$.priceRange = function() {
+
+	    return {
+	    "from": $("#priceFrom").val(),
+	    "to": $("#priceTo").val()
+	    }
+	}
+
 	start(JSON.stringify({
 		scores : [],
-		filters : filters
+		priceRange: $.priceRange()
+		// ,
+		// filters : filters
 	}));
 
 	updateRate = function(event, item, index, score, like) {
@@ -225,12 +244,18 @@ $(function() {
 
 		if (toRate.length === 0) {
 			console.log(JSON.stringify({
-				scores : message,
+				scores : message
+
+				/* ,
 				filters : filters
+				*/
 			}));
 			start(JSON.stringify({
 				scores : message,
+                priceRange: $.priceRange()
+				/* ,
 				filters : filters
+				*/
 			}));
 		}
 	};
@@ -245,7 +270,7 @@ $(function() {
         var targetLine
 
         if( lastLineChildren.length == lineItems ) {
-            targetLine = $("<div />", {class: "selectedItemsLine row"});
+            targetLine = $("<div />", {class: "selectedItemsLine col-md-12"});
             $("#selectedItemsBox").append(targetLine);
         } else {
             targetLine = lastLine;
@@ -299,45 +324,23 @@ $(function() {
 	$("#more-button").on("click", function(){
 		start(JSON.stringify({
 			scores : message,
+			priceRange: $.priceRange()
+			/* ,
 			filters : filters
+			*/
 		}));
 	});
 
 	$("#selectedItemsButton").on("click", function(e){
 
-	if ( $("#selectedItemsBox").is(":visible") ) {
-	    $("#selectedItemsBox").slideUp(function() {
-	        $("#selectedItemsBox").hide();
-	    });
-	} else {
-	    $("#selectedItemsBox").slideDown();
-	}
-
-/*
-        var mode = "fast";
-
-        if ( $("#mainBox").is(":visible") ) {
-            var current = $("#mainBox");
-            var next = $("#selectedItemsBox")
+        if ( $("#selectedItemsBox").is(":visible") ) {
+            $("#selectedItemsBox").slideUp(function() {
+                $("#selectedItemsBox").hide();
+            });
         } else {
-            var next = $("#mainBox");
-            var current = $("#selectedItemsBox")
-
+            $("#selectedItemsBox").slideDown();
         }
 
-        current.fadeToggle(mode, function() {
-            next.fadeToggle(mode);
-        });
-*/
-/*
-	    var elem = $("#selectedItemsBox");
-        var result = parseInt(elem.css('left'),selectedItemsInitialLeft) == 0 ? selectedItemsInitialLeft : 0;
-        // elem.animate({ left: result });
-
-        */
 	});
 
-	// $("#selectedItemsBox").css("left", selectedItemsInitialLeft);
-	// $("#selectedItemsBox").fadeIn("fast");
-	// console.log("shown")
 });

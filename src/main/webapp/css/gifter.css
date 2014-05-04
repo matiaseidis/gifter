@@ -131,7 +131,7 @@ span.label-white {
 	margin: 0 3px 0 0;
 }
 #more-button {
-	margin-top: 15%;
+	// margin-top: 15%;
 }
 .breadcrumb-item {
 	margin: 0 3px 3px 0;
@@ -221,14 +221,19 @@ border-bottom: 1px solid #CCC;
 // background: rgba(0, 0, 0, 0.62);
 
 }
-
+#selectedItemsButton:hover {
+color: #428bca;
+}
 #selectedItemsButton {
+color: #FFF;
+/*
 color: #333;
 opacity: 1;
 right: 0;
 top: 0;
 position: absolute;
 z-index: 999999;
+*/
 }
 
 .selected-item-box {
@@ -263,4 +268,11 @@ text-align:right;
 .selected-item-exclude span {
 font-size: 20px;
 width: 21px;
+}
+
+.navbar .navbar-form .glyphicon {
+color: #EDEDED;
+}
+.navbar {
+margin-bottom: 0px !important;
 }
