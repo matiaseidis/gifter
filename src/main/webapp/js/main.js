@@ -5,15 +5,7 @@ $(function() {
 	modalRendered = [];
 	filters = ["baby", "girl", "female", "boy", "male"];
 	url = "/service/gifter/recommendation";
-	
-//	$(".panel .checkbox input").on("change", function(e){
-//		var filter = $(e.target).val(); 
-//		if($(e.target).is(':checked')) {
-//			filters.push(filter);
-//		} else {
-//			filters.splice(filters.indexOf(filter), 1);
-//		}
-//	});
+	selectedItemsInitialLeft = $("#selectedItemsBox").css('left');
 	
 	$(".filter").on("click", function(e){
 
@@ -40,7 +32,6 @@ $(function() {
 		}
 		
 		elem.blur();
-//		console.log(filters)
 	});
 	
 	zoom = function(image){
@@ -72,19 +63,11 @@ $(function() {
 		var splitted = title.split(">");
 		$.each(splitted, function(index, item) {
 			if (index < splitted.length -1) {
-				
-			// chico	
-//			elem.append($("<input />", {
-//				type: "button",
-//				value: item,
-//				class: "ch-btn-skin ch-btn-small breadcrumb-item"
-//			}));
-			
-			// bootstrap
+
 			var b = $("<button />", {
 				type: "button",
 				text: item,
-				class: "btn btn-default btn-xs filter breadcrumb-item"
+				class: "btn btn-info btn-xs filter breadcrumb-item"
 			});
 			elem.append(b);
 			
@@ -103,6 +86,19 @@ $(function() {
 		$(".filters").toggle();
 		$("#more-button").toggle();
 	};
+
+	$.selectedItem = function(id) {
+    	var selectedItem = $("<div />", {
+    	class: "selectedItem",
+    	id: $.selectedItemElemId(id),
+    	text: id});
+    	return selectedItem;
+   	};
+
+   	$.selectedItemElemId = function(id) {
+   	return "selected-item-" + id;
+   	};
+
 	
 	start = function(r) {
 		spinnerOn();
@@ -115,8 +111,8 @@ $(function() {
 					data : r,
 					contentType : "application/json",
 					success : function(data, textStatus, jqXHR) {
-						
-						$("#mainBox").empty();
+						var mainBox = $("#mainBox")
+						mainBox.empty();
 						message = data;
 						$.each(data, function(index, item) {
 							var title = item.name;
@@ -133,11 +129,7 @@ $(function() {
 							if(index == 1) {
 								box.addClass("center");
 							}
-							box.appendTo('#mainBox');
-
-							var itemCategoryBox = $('<div/>', {
-								class: "item-category-box"
-							});
+							mainBox.append(box);
 
 							$('<div/>', {class: "item-title-box"})
 							.append($('<a />', {
@@ -145,31 +137,36 @@ $(function() {
 								text : item.items[0].title,
 								class : "detail"
 							}))
+							.append(buttons(item.id))
+//							.append(button("yes-" + item.id, "rateBoxElem", "ok"))
 							.appendTo('#' + item.id);
 							
 							detailModal(item).appendTo('#' + item.id);
 							
 							$('<div/>', {class: "item-main-image-box"})
-							.append(button("yes-" + item.id, "rateBoxElem", "ok"))
+							
 							.append($('<img/>', {
 								src : image,
-								alt : title,
-								lowsrc: "../images/spinner.gif"
+								alt : title
 							}))
 							.appendTo('#' + item.id)
 							.on("click", function(e) { turnOnModal(e, item, index);});
 							
 							$('<div/>', { class : "rateBox" }).appendTo('#' + item.id);
 
+							var itemCategoryBox = $('<div/>', {class: "item-category-box"});
 							breadcrumb(title, itemCategoryBox);
 							itemCategoryBox.appendTo('#' + item.id);
 							
-							$("#" + "yes-" + item.id).on("click", function(e) {
-								console.log(e);
-								console.log("in update rate");
+							$("#yes-" + item.id).on("click", function(e) {
 								e.preventDefault();
-								updateRate(e, item.id, index, true);
+								updateRate(e, item, index, true, true);
 							});
+
+							$("#already-have-"+ item.id).on("click", function(e) {
+                                e.preventDefault();
+                                updateRate(e, item, index, true, false);
+                            });
 							
 							$('#' + item.id + " a.detail").on("click", function(e) { turnOnModal(e, item, index);});
 						});
@@ -188,19 +185,42 @@ $(function() {
 		filters : filters
 	}));
 
-	updateRate = function(event, itemId, index, score) {
+	updateRate = function(event, item, index, score, like) {
 
 		message[index].userScore = score;
 
-		var button = $("#yes-" + itemId);
-		var likeClass = "btn-success";
-		var defaultClass = "btn-default";
-		if(button.hasClass('btn-success')) {
-			toRate.push(index);
-			button.removeClass(likeClass).addClass(defaultClass);
+		var likeButton = $("#yes-" + item.id);
+		var alreadyHaveButton = $("#already-have-"+ item.id);
+
+		var likeClick = event.target.id.indexOf("yes") >= 0;
+
+        var thisButton  =  likeClick ? likeButton : alreadyHaveButton;
+        var otherButton = !likeClick ? likeButton : alreadyHaveButton;
+
+		var green = 'btn-success';
+		var white = 'btn-default';
+
+		if(thisButton.hasClass(green)) {
+		    // lo volvemos a agregar a la lista de toRate
+		    toRate.push(index);
+		    thisButton.removeClass(green).addClass(white);
+		    // lo quitamos de selected items
+		    $("#"+$.selectedItemElemId(item.id)).remove();
+
 		} else {
-			toRate.splice(toRate.indexOf(index), 1);
-			button.removeClass(defaultClass).addClass(likeClass);
+
+        	// si otherButton estaba green, hacemos el switch
+        	if(otherButton.hasClass(green)) {
+        	    otherButton.removeClass(green).addClass(white);
+        	} else {
+        	    // lo quitamos de la lista de toRate
+                toRate.splice(toRate.indexOf(index), 1);
+                // lo agregamos a selected items
+                addToSelectedItems(item);
+                // $("#selectedItemsBox").append($.selectedItem(item.id));
+        	}
+
+        	thisButton.removeClass(white).addClass(green);
 		}
 
 		if (toRate.length === 0) {
@@ -213,6 +233,54 @@ $(function() {
 				filters : filters
 			}));
 		}
+	};
+
+	addToSelectedItems = function(item) {
+
+	    // appendToSelectedItemsCarousel(item);
+
+	    var lineItems = 6;
+	    var lastLine = $("#selectedItemsBox .selectedItemsLine").last();
+	    var lastLineChildren = lastLine.children(".selected-item-box");
+        var targetLine
+
+        if( lastLineChildren.length == lineItems ) {
+            targetLine = $("<div />", {class: "selectedItemsLine row"});
+            $("#selectedItemsBox").append(targetLine);
+        } else {
+            targetLine = lastLine;
+        }
+
+        var selectedItemBox = $("<div />", {class:"selected-item-box col-md-"+parseInt(12/lineItems), id: "selected-item-"+item.id});
+        var selectedItem = $("<div />", {class:"selected-item"});
+        selectedItemBox.append(selectedItem);
+        var title = $("<div />", {class:"selected-item-title-box"});
+
+        var excludeButton = $("<a />", {href:"#", class:"selected-item-exclude", "title": "Desechar recomendación"});
+        excludeButton.append($("<span />", {class: "glyphicon glyphicon-remove-circle"}));
+        title.append(excludeButton);
+        title.append($("<a />", {href:"#", class:"selected-item-title", "text": item.items[0].title}));
+        selectedItem.append(title);
+        selectedItem.append($('<img/>', { "src" : item.items[0].images[0], alt : item.items[0].title }));
+        targetLine.append(selectedItemBox);
+	};
+	
+	buttons = function(id) {
+		var b = $("<div />", {class: "btn-group"})
+		.append($("<button />", {
+			"type": "button", 
+			class:"btn btn-default btn-xs",
+			"text":"lo tiene",
+			id: "already-have-"+id}))
+		.append($("<button />", {
+			"type": "button", 
+//			likeButton button-ok rateBoxElem
+			class:"btn btn-default btn-xs",
+			"text":"me gusta",
+			id: "yes-"+id}));
+		var box = $("<div />", {class: "ok-buttons"})
+        box.append(b);
+		return box;
 	};
 	
 	button = function(id, clazz, icon) {
@@ -234,4 +302,30 @@ $(function() {
 			filters : filters
 		}));
 	});
+
+	$("#selectedItemsButton").on("click", function(e){
+
+        var mode = "fast";
+
+        if ( $("#mainBox").is(":visible") ) {
+            var current = $("#mainBox");
+            var next = $("#selectedItemsBox")
+        } else {
+            var next = $("#mainBox");
+            var current = $("#selectedItemsBox")
+
+        }
+
+        current.fadeToggle(mode, function() {
+            next.fadeToggle(mode);
+        });
+
+	    var elem = $("#selectedItemsBox");
+        var result = parseInt(elem.css('left'),selectedItemsInitialLeft) == 0 ? selectedItemsInitialLeft : 0;
+        // elem.animate({ left: result });
+	});
+
+	// $("#selectedItemsBox").css("left", selectedItemsInitialLeft);
+	// $("#selectedItemsBox").fadeIn("fast");
+	// console.log("shown")
 });

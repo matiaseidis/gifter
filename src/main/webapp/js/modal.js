@@ -35,16 +35,7 @@ $(function(){
 			text: "Volver"			
 		}));
 		
-//		var headerButton = $('<button/>', { 
-//			class : "close",
-//			"type": "button", 
-//			"data-dismiss": "modal",
-//			"aria-hidden":"true",
-//			text: "x"			
-//		});
-//		headerButton.appendTo(header);
-		
-		var headerTitle = $('<h4/>', { 
+		var headerTitle = $('<h4/>', {
 			class : "modal-title item-title-box",
 			text: item.items[0].title
 		});
@@ -82,47 +73,11 @@ $(function(){
 		modal.on('shown.bs.modal', function() {
 		
 			if($.inArray(index, modalRendered) == -1) {
+
 				console.log("missing... building");
-				
 				buildCarousel(item, modalSelector);
-				
-//				var carouselBox = $("<ul />", {class: "ch-carousel-content ch-carousel-list"});
-				
-//				$.each(item.items[0].images, function(index, image) {
-//					var img = $("<li />", {class: "ch-carousel-item"}).append(
-//							$("<img />", {
-//						src: image
-//					})
-//				);
-//					img.appendTo($(modalSelector + " .modal-body-up"));
-//					img.appendTo(carouselBox);
-//					if(index == 0) {
-//						img.addClass("first");
-//						$(modalSelector + " .modal-body-down img").attr("src", image);
-//						$(modalSelector + " .modal-body-up .first").css("border", "5px solid #999");
-//						
-////						$(modalSelector + " .modal-body-down").empty();
-////						$(modalSelector + " .modal-body-down").append(zoom(image));
-//					}
-//				});
-//				$(modalSelector + " .modal-body-up img")
-//				.on("mouseenter", function(e){
-//					$(modalSelector + " .modal-body-down img").attr("src", e.target.src);
-//					// reset all
-//					$(modalSelector + " .modal-body-up img").css("border", "1px solid #ddd");
-//					// edit selected
-//					$(e.target).css("border", "5px solid #999");
-//				});
-				
-//				$(modalSelector + " .modal-body-up").append(carouselBox);
-//				$(modalSelector + " .modal-body-up").carousel({
-//						"pagination": true,
-//						"maxItems": 3,
-//						"arrows": "outside"});
-////				carouselBox.carousel({'fx': false})
-////				.on('itemsadd', function ($items) {console.log($items);});
-				
 				modalRendered.push(index);
+
 			} else {
 				console.log("not missing... skip building");
 			}

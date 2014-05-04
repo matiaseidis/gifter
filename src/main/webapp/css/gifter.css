@@ -196,3 +196,71 @@ span.label-white {
 .carousel-control span {
 	font-size:20px;
 }
+.ok-buttons{
+
+}
+#selectedItemsButtonBox {
+    background: #333;
+}
+#selectedItemsBox {
+display:none;
+}
+
+.selectedItemsLine {
+// position: absolute;
+// opacity: 0.7;
+// width: 100%;
+// left: -95%;
+// top: 200px;
+// z-index: 999;
+// border-radius: 0 5px 5px 0;
+
+min-height: 200px;
+border-bottom: 1px solid #EDEDED;
+// background-color: #333;
+// background: rgba(0, 0, 0, 0.62);
+
+}
+
+#selectedItemsButton {
+color: #333;
+opacity: 1;
+right: 0;
+top: 0;
+position: absolute;
+z-index: 999999;
+}
+
+.selected-item-box {
+// width: 20%;
+opacity: 1;
+
+padding: 5px;
+// margin: 5px;
+// float:left;
+// max-height: 240px;
+text-align: center;
+}
+.selected-item {
+// background-color: #FFF;
+}
+.selected-item a {
+}
+.selected-item img {
+max-width: 100%;
+max-height: 160px;
+margin: 5px;
+}
+#lowerBox {
+text-align:right;
+}
+.selected-item-exclude {
+ // background-color: #333;
+ // background: rgba(0, 0, 0, 0.62);
+ color: #333;
+ float:right;
+}
+.selected-item-exclude span {
+font-size: 20px;
+width: 21px;
+}
