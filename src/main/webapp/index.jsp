@@ -53,33 +53,12 @@
             </div>
         </div>
 
-        <div id="mainBox" class="row"></div>
-
-
         <div id="selectedItemsBox">
-        <p>Recomendaciones seleccionadas:</p>
-        <div class="selectedItemsLine row">
-<!--
-        	    <div class="carousel slide" data-ride="carousel" data-interval="false" id="selected-items-carousel" >
-        	     <div class="carousel-inner">
-        	     	<div class="item active">
-        	     	    <div class="col-md-1"></div>
-        	     	    <div class="item-elements col-md-10"></div>
-        	     	    <div class="col-md-1"></div>
-        	     	</div>
-        	     </div>
-        	     <a class="left carousel-control" data-slide="prev" href="#selected-items-carousel">
-        	        <span class="glyphicon glyphicon-chevron-left"/>
-        	     </a>
-        	     <a class="right carousel-control" data-slide="next" href="#selected-items-carousel">
-                    <span class="glyphicon glyphicon-chevron-right"/>
-                 </a>
-        	    </div>
-
-        	    -->
-        	</div>
+            <p>Recomendaciones seleccionadas:</p>
+            <div class="selectedItemsLine row"></div>
         </div>
 
+        <div id="mainBox" class="row"></div>
 
         <div id="lowerBox" class="row">
         <p><h6>Made by us</h6></p>

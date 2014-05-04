@@ -305,6 +305,15 @@ $(function() {
 
 	$("#selectedItemsButton").on("click", function(e){
 
+	if ( $("#selectedItemsBox").is(":visible") ) {
+	    $("#selectedItemsBox").slideUp(function() {
+	        $("#selectedItemsBox").hide();
+	    });
+	} else {
+	    $("#selectedItemsBox").slideDown();
+	}
+
+/*
         var mode = "fast";
 
         if ( $("#mainBox").is(":visible") ) {
@@ -319,10 +328,13 @@ $(function() {
         current.fadeToggle(mode, function() {
             next.fadeToggle(mode);
         });
-
+*/
+/*
 	    var elem = $("#selectedItemsBox");
         var result = parseInt(elem.css('left'),selectedItemsInitialLeft) == 0 ? selectedItemsInitialLeft : 0;
         // elem.animate({ left: result });
+
+        */
 	});
 
 	// $("#selectedItemsBox").css("left", selectedItemsInitialLeft);
