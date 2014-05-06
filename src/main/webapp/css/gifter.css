@@ -276,3 +276,30 @@ width: 21px;
 .navbar {
 margin-bottom: 0px !important;
 }
+
+
+.tooltip {
+	display: block;
+	position: absolute;
+	border: 1px solid #D9D9D9;
+	font: 400 12px/12px Arial;
+	border-radius: 3px;
+	background: #fff;
+	top: -43px;
+	padding: 5px;
+	left: -9px;
+	text-align: center;
+	width: 50px;
+	opacity:1;
+}
+.noUi-handle-upper .tooltip {
+    top: 30px;
+}
+.tooltip strong {
+	display: block;
+	padding: 2px;
+}
+
+#pricesSliderBox{
+margin-top:80px;
+}

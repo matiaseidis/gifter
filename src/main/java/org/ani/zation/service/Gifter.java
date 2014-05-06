@@ -21,6 +21,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.ani.zation.recommender.GifterSession;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -32,8 +34,10 @@ import org.cronopios.regalator.GiftRecommendation;
 @Path("/gifter")
 public class Gifter {
 
-    private double defaultPriceFrom = 0;
-    private double defaultPriceTo = 50;
+    protected static final Log log = LogFactory.getLog(Gifter.class);
+
+    private int defaultPriceFrom = 0;
+    private int defaultPriceTo = 50;
 
 	@javax.ws.rs.core.Context
 	ServletContext context;
@@ -43,9 +47,12 @@ public class Gifter {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response reportScore(JSONObject input, @Context HttpServletRequest httpRequest) {
 
-		System.out.println("SCORE: " + input.toString());
+		log.debug("SCORE: " + input.toString());
 
 		Map<String, RecommendationDTO> userScore = new HashMap<String, RecommendationDTO>();
+
+        int priceFrom = defaultPriceFrom;
+        int priceTo = defaultPriceTo;
 
 		try {
 			JSONArray scores = input.getJSONArray("scores");
@@ -62,22 +69,18 @@ public class Gifter {
             String fromStr = priceRange.getString("from");
             String toStr = priceRange.getString("to");
 
-            double from = defaultPriceFrom;
-            double to = defaultPriceTo;
-
             if(!fromStr.isEmpty() && !toStr.isEmpty()) {
                 try {
-                    from = Double.parseDouble(fromStr);
-                    to = Double.parseDouble(toStr);
+                    priceFrom = Integer.parseInt(fromStr);
+                    priceTo = Integer.parseInt(toStr);
                 } catch (NumberFormatException nfe) {
-                    System.err.println("problems parsing price from - to. Using defaults: from: ["+defaultPriceFrom+"] and to: ["+defaultPriceTo+"] ");
-                    nfe.printStackTrace();
+                    log.error("problems parsing price from - to. Using defaults: from: ["+defaultPriceFrom+"] and to: ["+defaultPriceTo+"] ", nfe);
                 }
             } else {
-                System.out.println("No values for price from or to provided. Using defaults: from: ["+defaultPriceFrom+"] and to: ["+defaultPriceTo+"] ");
+                log.debug("No values for price from or to provided. Using defaults: from: ["+defaultPriceFrom+"] and to: ["+defaultPriceTo+"] ");
             }
 
-            System.out.println("price range - from: " + from + " - to: " + to + ". What to do?");
+            log.debug("price range - from: " + priceFrom + " - to: " + priceTo + ". What to do?");
 
 		} catch (JSONException e) {
 			return Response.status(400).entity("Invalid input").build();
@@ -93,6 +96,9 @@ public class Gifter {
 
 		List<Future<RecommendationDTO>> promises = new ArrayList<Future<RecommendationDTO>>();
 
+        final int finalPriceFrom = priceFrom;
+        final int finalPriceTo = priceTo;
+
 		for (final GiftRecommendation<CanonicalCategory> r : recommended) {
 
 			final RecommendationDTO e = new RecommendationDTO(r);
@@ -101,7 +107,7 @@ public class Gifter {
 
 				@Override
 				public RecommendationDTO call() throws Exception {
-					List<? extends GiftItem> searchResult = giftItemSearchingService.search(r.getGift(), 0, 50);
+					List<? extends GiftItem> searchResult = giftItemSearchingService.search(r.getGift(), finalPriceFrom, finalPriceTo);
 					for (GiftItem giftItem : searchResult) {
 						e.getItems().add(new GiftItemDTO(giftItem.getTitle(), giftItem.getImages(), giftItem.getExternalURL()));
 					}

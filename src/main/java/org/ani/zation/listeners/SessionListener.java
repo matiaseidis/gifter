@@ -24,7 +24,6 @@ public class SessionListener implements HttpSessionListener {
 	public void sessionCreated(HttpSessionEvent arg0) {
 		
 		log.debug("NEW SESSION!!!");
-		System.out.println("NEW SESSION!!!");
 
 		ServletContext ctx = arg0.getSession().getServletContext();
 		Collection<CanonicalCategory> categories = (Collection<CanonicalCategory>) ctx.getAttribute("categories");

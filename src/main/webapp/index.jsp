@@ -25,16 +25,14 @@
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
   <div class="container">
     <ul class="nav navbar-nav">
-    <li>
 
-    <div id="priceSlider"></div>
-
-    </li>
                 <li class="active"><a href="#">Empezar de nuevo</a></li>
+
                 <li>
 
 
-                </li>
+
+                    </li>
                 <li>
 
                  <div id="selectedItemsButtonBox">
@@ -95,30 +93,11 @@
 	<div id="upperBox" class="row">
         <div class="col-md-12">
             <div class="col-md-4">
-
-<!--
-<div class="row">
-
-  <div class="col-xs-1">
-  <span class="glyphicon glyphicon-usd"></span>
-  </div>
-  <div class="col-xs-3">
-    <input type="text" class="form-control input-sm" id="priceFrom" placeholder="desde">
-  </div>
-  <div class="col-xs-3">
-      <input type="text" class="form-control input-sm" id="priceTo" placeholder="hasta">
-    </div>
+<div id="pricesSliderBox">
+ <div id="priceSlider"></div>
+ <div id="priceSliderTooltipFrom"></div>
+ <div id="priceSliderTooltipTo"></div>
 </div>
--->
-
-<!--
-             <div id="selectedItemsButtonBox">
-            <a href="#" title="recomendaciones seleccionadas" class="btn btn-lg" type="button" id="selectedItemsButton">
-                            <span class="glyphicon glyphicon-gift"></span>
-                            </a>
-
-            </div>
-            -->
             </div>
                 <div class="col-md-4">
                     <h1>Gifter</h1>

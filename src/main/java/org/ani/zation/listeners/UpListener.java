@@ -30,7 +30,6 @@ public class UpListener implements ServletContextListener {
 		try {
 
             log.info("Using encoding: " + System.getProperty("file.encoding"));
-            System.out.println("Using encoding: " + System.getProperty("file.encoding"));
 
 			Collection<CanonicalCategory> mlCategories = mercadoLibreTargetCategories();
 			Collection<CanonicalCategory> all = Lists.newLinkedList();

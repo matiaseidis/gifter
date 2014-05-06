@@ -40,7 +40,7 @@ public class GifterSession {
 			rated.addAll(toRate);
 			toRate.clear();
 		} else {
-			System.out.println("news is empty");
+			log.debug("news is empty");
 		}
 		
 		Set<GiftRecommendation<CanonicalCategory>> recommend = this.recommender.recommend(rated, nRecommendations);

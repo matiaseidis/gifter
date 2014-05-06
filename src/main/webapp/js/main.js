@@ -8,14 +8,38 @@ $(function() {
 	selectedItemsInitialLeft = $("#selectedItemsBox").css('left');
 	priceRange = {}
 
+    var customToolTip = function(c) {
+        return $.Link({
+            target: '-tooltip-<div class="tooltip"></div>',
+            method: function ( value ) {
+
+                // The tooltip HTML is 'this', so additional
+                // markup can be inserted here.
+                $(this).html(
+                    '<strong>'+c+' </strong>' +
+                    '<span>$' + value + '</span>'
+                );
+            }
+        });
+    }
+
 
     $("#priceSlider").noUiSlider({
-        start: [20, 80],
+        start: [20, 50],
         connect: true,
+        margin: 340,
+        step: 20,
         range: {
-            'min': 0,
-            'max': 100
-        }
+            'min': 20,
+            'max': 2000
+        },
+        serialization: {
+        		format: {
+        			decimals: 0
+        		},
+        		lower: [ customToolTip("Desde") ],
+        		upper: [ customToolTip("Hasta") ]
+        	}
     });
 	/*
 	$(".filter").on("click", function(e){
@@ -129,12 +153,20 @@ $(function() {
 					data : r,
 					contentType : "application/json",
 					success : function(data, textStatus, jqXHR) {
+
+
 						var mainBox = $("#mainBox")
 						mainBox.empty();
 						message = data;
 						$.each(data, function(index, item) {
 							var title = item.name;
 							var image = item.imageURL;
+
+							if(item.items.length == 0) {
+							    console.log("ML unreachable...");
+							    return;
+							}
+
 							if (item.items[0].images[0]) {
 								image = item.items[0].images[0];
 							}
