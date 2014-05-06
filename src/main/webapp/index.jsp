@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="css/gifter.css">
 </head>
 <body>
-<nav class="navbar navbar-default navbar-static-top navbar-inverse" role="navigation">
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
   <div class="container">
     <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Empezar de nuevo</a></li>

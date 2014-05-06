@@ -200,7 +200,7 @@ span.label-white {
 
 }
 #selectedItemsButtonBox {
-    background: #333;
+ //   background: #333;
 }
 #selectedItemsBox {
 display:none;
@@ -225,7 +225,7 @@ border-bottom: 1px solid #CCC;
 color: #428bca;
 }
 #selectedItemsButton {
-color: #FFF;
+color: #333;
 /*
 color: #333;
 opacity: 1;
@@ -271,7 +271,7 @@ width: 21px;
 }
 
 .navbar .navbar-form .glyphicon {
-color: #EDEDED;
+// color: #EDEDED;
 }
 .navbar {
 margin-bottom: 0px !important;
