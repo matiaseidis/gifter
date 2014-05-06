@@ -9,6 +9,8 @@ import java.util.concurrent.Executors;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.cronopios.regalator.CanonicalCategory;
 import org.cronopios.regalator.CanonicalCategoryJaccardDistance;
 import org.cronopios.regalator.GiftWeighter;
@@ -21,9 +23,13 @@ import com.google.common.collect.Lists;
 
 public class UpListener implements ServletContextListener {
 
+    protected static final Log log = LogFactory.getLog(UpListener.class);
+
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
 		try {
+
+            log.info("Using encoding: " + System.getProperty("file.encoding"));
 
 			Collection<CanonicalCategory> mlCategories = mercadoLibreTargetCategories();
 			Collection<CanonicalCategory> all = Lists.newLinkedList();
