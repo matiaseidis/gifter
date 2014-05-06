@@ -285,15 +285,18 @@ margin-bottom: 0px !important;
 	font: 400 12px/12px Arial;
 	border-radius: 3px;
 	background: #fff;
-	top: -43px;
+	// top: -43px;
+	top: -4px;
 	padding: 5px;
-	left: -9px;
+	// left: -9px;
+	left: -55px;
+
 	text-align: center;
 	width: 50px;
 	opacity:1;
 }
 .noUi-handle-upper .tooltip {
-    top: 30px;
+    // top: 30px;
 }
 .tooltip strong {
 	display: block;
@@ -302,4 +305,7 @@ margin-bottom: 0px !important;
 
 #pricesSliderBox{
 margin-top:80px;
+}
+#pricesSlider {
+height:300px;
 }

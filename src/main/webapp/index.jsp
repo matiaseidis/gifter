@@ -94,7 +94,7 @@
         <div class="col-md-12">
             <div class="col-md-4">
 <div id="pricesSliderBox">
- <div id="priceSlider"></div>
+ <div id="pricesSlider"></div>
  <div id="priceSliderTooltipFrom"></div>
  <div id="priceSliderTooltipTo"></div>
 </div>

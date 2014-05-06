@@ -135,14 +135,36 @@
 			<artifactId>joda-time</artifactId>
 			<version>2.1</version>
 		</dependency>
-
+<!--
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>1.6.1</version>
         </dependency>
+-->
 
-		<dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.0-rc1</version>
+        </dependency>
+
+
+        <!--
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+        </dependency>
+        -->
+
+        <dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.5</version>
@@ -152,11 +174,7 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.3</version>
 		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.16</version>
-		</dependency>
+
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-core</artifactId>
@@ -230,12 +248,14 @@
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
+                    <!--
                     <systemProperties>
                         <systemProperty>
                             <name>file.encoding</name>
                             <value>UTF-8</value>
                         </systemProperty>
                     </systemProperties>
+                    -->
 				</configuration>
 			</plugin>
 			<!-- <plugin> -->

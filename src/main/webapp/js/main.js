@@ -23,14 +23,15 @@ $(function() {
         });
     }
 
-
-    $("#priceSlider").noUiSlider({
-        start: [20, 50],
+    priceSliderStep = 20;
+    $("#pricesSlider").noUiSlider({
+        start: [priceSliderStep, 50],
         connect: true,
         margin: 340,
-        step: 20,
+        step: priceSliderStep,
+        orientation: "vertical",
         range: {
-            'min': 20,
+            'min': priceSliderStep,
             'max': 2000
         },
         serialization: {
@@ -233,8 +234,8 @@ $(function() {
 	$.priceRange = function() {
 
 	    return {
-	    "from": $("#priceFrom").val(),
-	    "to": $("#priceTo").val()
+	    "from": $("#pricesSlider").val()[0],
+	    "to": $("#pricesSlider").val()[1]
 	    }
 	}
 
