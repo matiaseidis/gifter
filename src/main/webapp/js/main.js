@@ -8,6 +8,15 @@ $(function() {
 	selectedItemsInitialLeft = $("#selectedItemsBox").css('left');
 	priceRange = {}
 
+
+    $("#priceSlider").noUiSlider({
+        start: [20, 80],
+        connect: true,
+        range: {
+            'min': 0,
+            'max': 100
+        }
+    });
 	/*
 	$(".filter").on("click", function(e){
 

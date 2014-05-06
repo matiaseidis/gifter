@@ -224,6 +224,12 @@
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>file.encoding</name>
+                            <value>UTF-8</value>
+                        </systemProperty>
+                    </systemProperties>
 				</configuration>
 			</plugin>
 			<!-- <plugin> -->

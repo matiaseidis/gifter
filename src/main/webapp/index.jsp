@@ -12,6 +12,7 @@
 <title>Gifter</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/gifter.css">
+<link rel="stylesheet" href="css/jquery.nouislider.css">
 
 <link rel="shortcut icon" href="images/favicon.ico">
 
@@ -24,6 +25,11 @@
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
   <div class="container">
     <ul class="nav navbar-nav">
+    <li>
+
+    <div id="priceSlider"></div>
+
+    </li>
                 <li class="active"><a href="#">Empezar de nuevo</a></li>
                 <li>
 
@@ -145,9 +151,8 @@
 <script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="js/modal.js"></script>
 <script type="text/javascript" src="js/carousel.js"></script>
-<!--
-<script type="text/javascript" src="js/selectedItemsCarousel.js"></script>
--->
+<script type="text/javascript" src="js/jquery.nouislider.min.js"></script>
+
 </body>
 
 
