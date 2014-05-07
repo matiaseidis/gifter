@@ -62,8 +62,7 @@ $(function(){
 	turnOnModal = function(e, item, index){
 		
 		e.preventDefault();
-		if ($(e.target).is('.likeButton')) {
-			console.log("false");
+		if ($(e.target).is('.okButtonElem')) {
 			return false;
 		} 
 		

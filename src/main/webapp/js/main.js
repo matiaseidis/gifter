@@ -193,9 +193,18 @@ $(function() {
 							.appendTo('#' + item.id);
 							
 							detailModal(item).appendTo('#' + item.id);
-							
+
+							var okButton = $("<div />", {
+							    class: "okButton white okButtonElem",
+							    id: "yes-"+item.id,
+							    href:"#"
+                            });
+							okButton.append($("<span />", {
+                                class: "glyphicon glyphicon-ok-circle okButtonElem"
+							}));
+
 							$('<div/>', {class: "item-main-image-box"})
-							
+							.append(okButton)
 							.append($('<img/>', {
 								src : image,
 								alt : title
@@ -252,14 +261,14 @@ $(function() {
 
 		var likeButton = $("#yes-" + item.id);
 		var alreadyHaveButton = $("#already-have-"+ item.id);
-
-		var likeClick = event.target.id.indexOf("yes") >= 0;
+        // console.log("event id: " + event.delegateTarget.id);
+		var likeClick = event.delegateTarget.id.indexOf("yes") >= 0;
 
         var thisButton  =  likeClick ? likeButton : alreadyHaveButton;
         var otherButton = !likeClick ? likeButton : alreadyHaveButton;
 
-		var green = 'btn-success';
-		var white = 'btn-default';
+		var green = 'green';
+		var white = 'white';
 
 		if(thisButton.hasClass(green)) {
 		    // lo volvemos a agregar a la lista de toRate
@@ -277,8 +286,9 @@ $(function() {
         	    // lo quitamos de la lista de toRate
                 toRate.splice(toRate.indexOf(index), 1);
                 // lo agregamos a selected items
-                addToSelectedItems(item);
-                // $("#selectedItemsBox").append($.selectedItem(item.id));
+                if(likeClick) {
+                    addToSelectedItems(item);
+                }
         	}
 
         	thisButton.removeClass(white).addClass(green);
@@ -339,12 +349,14 @@ $(function() {
 			class:"btn btn-default btn-xs",
 			"text":"lo tiene",
 			id: "already-have-"+id}))
+			/*
 		.append($("<button />", {
 			"type": "button", 
-//			likeButton button-ok rateBoxElem
 			class:"btn btn-default btn-xs",
 			"text":"me gusta",
-			id: "yes-"+id}));
+			id: "yes-"+id}))
+			*/
+			;
 		var box = $("<div />", {class: "ok-buttons"})
         box.append(b);
 		return box;

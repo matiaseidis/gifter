@@ -41,7 +41,7 @@ public class Gifter {
 	@javax.ws.rs.core.Context
 	ServletContext context;
 
-    boolean mocked = false;
+    boolean mocked = true;
 
 	@POST
 	@Path("/recommendation")
