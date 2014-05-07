@@ -20,6 +20,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.net.URL;
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -31,13 +35,13 @@ public class Gifter {
 
    protected static final Log log = LogFactory.getLog(Gifter.class);
 
-    // LogManager.getLogger(Gifter.class);
-
     private int defaultPriceFrom = 0;
     private int defaultPriceTo = 50;
 
 	@javax.ws.rs.core.Context
 	ServletContext context;
+
+    boolean mocked = false;
 
 	@POST
 	@Path("/recommendation")
@@ -46,7 +50,15 @@ public class Gifter {
 
 		log.debug("SCORE: " + input.toString());
 
-		Map<String, RecommendationDTO> userScore = new HashMap<String, RecommendationDTO>();
+        if(mocked) try {
+            log.info("about to return mocked response");
+            return Response.status(200).entity(new JSONArray(new BufferedReader(new FileReader(new File(this.getClass().getResource("/mockedResponse.json").toURI()))).readLine())).build();
+        } catch (Exception e) {
+            log.error("failed to build mocked response", e);
+        }
+
+
+        Map<String, RecommendationDTO> userScore = new HashMap<String, RecommendationDTO>();
 
         int priceFrom = defaultPriceFrom;
         int priceTo = defaultPriceTo;

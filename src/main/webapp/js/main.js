@@ -156,7 +156,7 @@ $(function() {
 					success : function(data, textStatus, jqXHR) {
 
 
-						var mainBox = $("#mainBox")
+						var mainBox = $("#mainBox .reccomendations")
 						mainBox.empty();
 						message = data;
 						$.each(data, function(index, item) {

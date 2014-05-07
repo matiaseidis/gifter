@@ -288,8 +288,8 @@ margin-bottom: 0px !important;
 	// top: -43px;
 	top: -4px;
 	padding: 5px;
-	// left: -9px;
-	left: -55px;
+	left: 30px;
+	// left: -55px;
 
 	text-align: center;
 	width: 50px;
@@ -305,7 +305,21 @@ margin-bottom: 0px !important;
 
 #pricesSliderBox{
 margin-top:80px;
+// padding-left: 60%;
+
 }
 #pricesSlider {
 height:300px;
+}
+
+.arrow_box {
+	/*
+	width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 100px 0 100px 50px;
+    border-color: transparent transparent transparent #13b3cf;
+    margin-top:150%;
+    */
+    font-size: 100px;
 }

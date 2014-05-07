@@ -26,7 +26,7 @@
   <div class="container">
     <ul class="nav navbar-nav">
 
-                <li class="active"><a href="#">Empezar de nuevo</a></li>
+                <li class="active"><a href="#"><span class="glyphicon glyphicon-refresh"></span>Empezar de nuevo</a></li>
 
                 <li>
 
@@ -42,7 +42,7 @@
 
                 </li>
               </ul>
-
+<!--
               <form class="navbar-form navbar-left" role="search">
                   <div class="form-group">
                     <span class="glyphicon glyphicon-usd"></span>
@@ -50,6 +50,9 @@
                     <input type="text" class="form-control input-sm" id="priceTo" placeholder="hasta">
                    </div>
                </form>
+-->
+
+               <!--
                <form class="navbar-form navbar-right" role="search">
 <div class="form-group">
                        <button type="submit" class="btn btn-primary" id="more-button" >M&#225;s recomendaci&#243;nes</button>
@@ -57,7 +60,7 @@
 
 
                      </form>
-
+-->
                   <!--
                                             <div class="row">
 
@@ -92,15 +95,11 @@
 	
 	<div id="upperBox" class="row">
         <div class="col-md-12">
-            <div class="col-md-4">
-<div id="pricesSliderBox">
- <div id="pricesSlider"></div>
- <div id="priceSliderTooltipFrom"></div>
- <div id="priceSliderTooltipTo"></div>
-</div>
-            </div>
+            <div class="col-md-4"></div>
                 <div class="col-md-4">
+                    <!--
                     <h1>Gifter</h1>
+                    -->
                 </div>
                 <div class="col-md-4">
                     <!--
@@ -116,7 +115,25 @@
             <div class="selectedItemsLine col-md-12"></div>
         </div>
 
-        <div id="mainBox" class="row"></div>
+        <div id="mainBox" class="row">
+
+            <div class="col-md-1">
+                <div id="pricesSliderBox">
+                 <div id="pricesSlider"></div>
+                 <div id="priceSliderTooltipFrom"></div>
+                 <div id="priceSliderTooltipTo"></div>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="row reccomendations"></div>
+            </div>
+            <div class="col-md-1">
+                <div class="arrow_box">
+                    <span class="glyphicon glyphicon-chevron-right" id="more-button"></span>
+                </div>
+            </div>
+
+        </div>
 
         <div id="lowerBox" class="row">
         <p><h6>Made by us</h6></p>
