@@ -1,5 +1,5 @@
 $(function() {
-	
+
 	message = {};
 	toRate = [];
 	modalRendered = [];
@@ -25,9 +25,9 @@ $(function() {
 
     priceSliderStep = 20;
     $("#pricesSlider").noUiSlider({
-        start: [priceSliderStep, 50],
+        start: [priceSliderStep, 200],
         connect: true,
-        margin: 340,
+        margin: priceSliderStep,
         step: priceSliderStep,
         orientation: "vertical",
         range: {
@@ -116,18 +116,30 @@ $(function() {
 	};
 	
 	spinnerOn = function(){
-		$("#spinner").fadeIn("fast");
-		// $(".filters").toggle();
-		// $("#more-button").toggle();
-		$(".navbar .container").toggle();
-
+        console.log($("#mainBox").height())
+        $("#spinner").height($("#mainBox").height());
+        // $("#noSpinner").fadeOut("fast");
+        $("#spinner").fadeIn("fast");
+	/*
+	console.log("on")
+        $("#noSpinner").fadeOut("fast", function(){
+        console.log("callback on")
+            $("#spinner").fadeIn("fast");
+     	});
+     	*/
 	};
 	
 	spinnerOff = function(){
-		$("#spinner").fadeOut("fast");
-		// $(".filters").toggle();
-		// $("#more-button").toggle();
-		$(".navbar .container").toggle();
+
+	$("#spinner").fadeOut("fast");
+	//$("#noSpinner").fadeIn("fast");
+        /*
+	console.log("off")
+        $("#spinner").fadeOut("fast", function(){
+        console.log("callback off")
+            $("#noSpinner").fadeIn("fast");
+        });
+        */
 	};
 
 	$.selectedItem = function(id) {
@@ -139,11 +151,13 @@ $(function() {
    	};
 
    	$.selectedItemElemId = function(id) {
-   	return "selected-item-" + id;
+   	    return "selected-item-" + id;
    	};
 
 	
 	start = function(r) {
+	    var mainBox = $("#recommendations")
+        mainBox.empty();
 		spinnerOn();
 		toRate = [];
 		modalRendered = [];
@@ -156,8 +170,7 @@ $(function() {
 					success : function(data, textStatus, jqXHR) {
 
 
-						var mainBox = $("#mainBox .reccomendations")
-						mainBox.empty();
+
 						message = data;
 						$.each(data, function(index, item) {
 							var title = item.name;
@@ -387,13 +400,42 @@ $(function() {
 
 	$("#selectedItemsButton").on("click", function(e){
 
-        if ( $("#selectedItemsBox").is(":visible") ) {
+	 // document.querySelector(".flip-container").classList.toggle("flip");
+
+        var selectedItemsBox = $("#selectedItemsBox");
+        var recommendationsBox = $("#recommendations");
+
+        var toHide = selectedItemsBox;
+        var toShow = recommendationsBox;
+        var mode = "fast";
+
+        if ( recommendationsBox.is(":visible") ) {
+            console.log("visible");
+            toHide = recommendationsBox;
+            toShow = selectedItemsBox;
+            /*
             $("#selectedItemsBox").slideUp(function() {
                 $("#selectedItemsBox").hide();
             });
-        } else {
+            */
+            /*
             $("#selectedItemsBox").slideDown();
+            */
         }
+
+
+        $(toHide).fadeOut(mode, function(){
+            $(toShow).fadeIn(mode);
+        });
+
+        /*
+        $(toHide).flip({
+        	direction:'tb'
+        })
+        */
+
+
+
 
 	});
 

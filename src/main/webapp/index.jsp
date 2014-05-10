@@ -11,8 +11,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gifter</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/gifter.css">
 <link rel="stylesheet" href="css/jquery.nouislider.css">
+<!-- <link rel="stylesheet" href="css/flip.css"> -->
+<link rel="stylesheet" href="css/gifter.css">
 
 <link rel="shortcut icon" href="images/favicon.ico">
 
@@ -86,13 +87,15 @@
 </nav>
 
 	<div class="container">
+
+	<!--
     <div id="spinner">
 		<h1>Gifter</h1>
 		<div id="spinner-inner">
 			<img id="thinking" src="images/thinking.jpg">
 		</div>
 	</div>
-	
+	-->
 	<div id="upperBox" class="row">
         <div class="col-md-12">
             <div class="col-md-4"></div>
@@ -110,11 +113,6 @@
             </div>
         </div>
 
-        <div id="selectedItemsBox" class="row">
-            <p>Recomendaciones seleccionadas:</p>
-            <div class="selectedItemsLine col-md-12"></div>
-        </div>
-
         <div id="mainBox" class="row">
 
             <div class="col-md-1">
@@ -124,9 +122,29 @@
                  <div id="priceSliderTooltipTo"></div>
                 </div>
             </div>
-            <div class="col-md-10">
-                <div class="row reccomendations"></div>
+
+            <div id="spinner" class="col-md-10">
+            		<!-- <h1>Gifter</h1> -->
+            		<div id="spinner-inner">
+            			<img id="thinking" src="images/thinking.jpg">
+            		</div>
+            	</div>
+
+            <div id="noSpinner" class="col-md-10 flip-container">
+            <div class="flipper">
+            <!-- <div class="col-md-10"> -->
+                <div class="row recommendations front" id="recommendations"></div>
+            <!-- </div> -->
+             <div id="selectedItemsBox" class="back">
+                <p>Recomendaciones seleccionadas:</p>
+                <div class="selectedItemsLine row"></div>
+             </div>
+
             </div>
+            </div>
+
+
+
             <div class="col-md-1">
                 <div class="arrow_box">
                     <span class="glyphicon glyphicon-chevron-right" id="more-button"></span>
@@ -148,6 +166,7 @@
 <script type="text/javascript" src="js/modal.js"></script>
 <script type="text/javascript" src="js/carousel.js"></script>
 <script type="text/javascript" src="js/jquery.nouislider.min.js"></script>
+<!--<script type="text/javascript" src="js/jquery.flip.min.js"></script>-->
 
 </body>
 

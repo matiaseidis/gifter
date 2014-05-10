@@ -4,12 +4,12 @@ h1 {
 	text-align: center;
 }
 #spinner {
-	position: absolute;
-	display: block;
-	width:100%;
-	height:100%;
-	background:  url("../images/bkg_transparent.png") repeat scroll 0 0 transparent;
-	left: 0%;
+	// position: absolute;
+	display: none;
+	// width:100%;
+//	height:100%;
+	// background:  url("../images/bkg_transparent.png") repeat scroll 0 0 transparent;
+	//left: 0%;
 	z-index:9999;
 }
 #spinner h1 {
@@ -288,8 +288,8 @@ margin-bottom: 0px !important;
 	// top: -43px;
 	top: -4px;
 	padding: 5px;
-	// left: 30px;
-	left: -55px;
+	left: 30px;
+	// left: -55px;
 
 	text-align: center;
 	width: 50px;
@@ -297,6 +297,7 @@ margin-bottom: 0px !important;
 }
 .noUi-handle-upper .tooltip {
     // top: 30px;
+    left: -55px;
 }
 .tooltip strong {
 	display: block;
@@ -304,12 +305,12 @@ margin-bottom: 0px !important;
 }
 
 #pricesSliderBox{
-margin-top:80px;
- padding-left: 60%;
+margin-top:40px;
+ // padding-left: 60%;
 
 }
 #pricesSlider {
-height:300px;
+height:400px;
 }
 
 .arrow_box {
@@ -321,9 +322,9 @@ height:300px;
      height:100px;
     // border:1px solid #000;
      background: #333;
-     border-radius: 0 0 0 90px;
-     -moz-border-radius: 0 0 0 90px;
-     -webkit-border-radius: 0 0 0 90px;
+     border-radius: 0 0 0 100px;
+     -moz-border-radius: 0 0 0 100px;
+     -webkit-border-radius: 0 0 0 100px;
      position: absolute;
      right: 0px;
 }
@@ -339,3 +340,27 @@ color:#2BDB40;
 .okButton.white {
 color:#FFF;
 }
+
+.item-category-box .btn-xs {
+padding: 0 2px 0 2px;
+font-size: 11px;
+line-height: 1.2;
+border-radius: 2px;
+}
+
+.noUi-vertical .noUi-handle {
+width: 26px;
+height: 18px;
+left: -5px;
+top: -17px;
+}
+.noUi-vertical .noUi-handle:before, .noUi-vertical .noUi-handle:after {
+width: 14px;
+height: 1px;
+left: 5px;
+top: 6px;
+}
+.noUi-vertical .noUi-handle:after {
+top: 9px;
+}
+
