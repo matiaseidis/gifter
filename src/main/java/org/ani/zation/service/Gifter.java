@@ -23,12 +23,8 @@ import javax.ws.rs.core.Response;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.net.URL;
 import java.util.*;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 @Path("/gifter")
 public class Gifter {
@@ -52,7 +48,11 @@ public class Gifter {
 
         if(mocked) try {
             log.info("about to return mocked response");
-            return Response.status(200).entity(new JSONArray(new BufferedReader(new FileReader(new File(this.getClass().getResource("/mockedResponse.json").toURI()))).readLine())).build();
+            BufferedReader br = new BufferedReader(new FileReader(new File(this.getClass().getResource("/mockedResponse.json").toURI())));
+            JSONArray mockedResponse = new JSONArray(br.readLine());
+            br.close();
+            new CountDownLatch(1).await(500, TimeUnit.MILLISECONDS);
+            return Response.status(200).entity(mockedResponse).build();
         } catch (Exception e) {
             log.error("failed to build mocked response", e);
         }

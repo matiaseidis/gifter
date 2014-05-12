@@ -43,45 +43,6 @@
 
                 </li>
               </ul>
-<!--
-              <form class="navbar-form navbar-left" role="search">
-                  <div class="form-group">
-                    <span class="glyphicon glyphicon-usd"></span>
-                    <input type="text" class="form-control input-sm" id="priceFrom" placeholder="desde">
-                    <input type="text" class="form-control input-sm" id="priceTo" placeholder="hasta">
-                   </div>
-               </form>
--->
-
-               <!--
-               <form class="navbar-form navbar-right" role="search">
-<div class="form-group">
-                       <button type="submit" class="btn btn-primary" id="more-button" >M&#225;s recomendaci&#243;nes</button>
-                   </div>
-
-
-                     </form>
--->
-                  <!--
-                                            <div class="row">
-
-                                              <div class="col-xs-1">
-                                              <span class="glyphicon glyphicon-usd"></span>
-                                              </div>
-                                              <div class="col-xs-3">
-                                                <input type="text" class="form-control input-sm" id="priceFrom" placeholder="desde">
-                                              </div>
-                                              <div class="col-xs-3">
-                                                  <input type="text" class="form-control input-sm" id="priceTo" placeholder="hasta">
-                                                </div>
-                                            </div>
--->
-
-
-
-
-
-
 
   </div>
 </nav>
@@ -105,10 +66,6 @@
                     -->
                 </div>
                 <div class="col-md-4">
-                    <!--
-                    <a id="more-button" class="btn btn-primary btn-lg" role="button">Más<br /> recomendaciónes</a>
-                    -->
-
                 </div>
             </div>
         </div>
@@ -126,21 +83,19 @@
             <div id="spinner" class="col-md-10">
             		<!-- <h1>Gifter</h1> -->
             		<div id="spinner-inner">
-            			<img id="thinking" src="images/thinking.jpg">
+            			<img id="thinking" src="images/thinking.jpg" />
             		</div>
             	</div>
 
             <div id="noSpinner" class="col-md-10 flip-container">
-            <div class="flipper">
-            <!-- <div class="col-md-10"> -->
-                <div class="row recommendations front" id="recommendations"></div>
-            <!-- </div> -->
-             <div id="selectedItemsBox" class="back">
-                <p>Recomendaciones seleccionadas:</p>
-                <div class="selectedItemsLine row"></div>
-             </div>
+                <div class="flipper">
+                    <div class="row recommendations front" id="recommendations"></div>
+                    <div id="selectedItemsBox" class="back">
+                        <p>Recomendaciones seleccionadas:</p>
+                        <div class="selectedItemsLine row"></div>
+                    </div>
 
-            </div>
+                </div>
             </div>
 
 

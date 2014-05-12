@@ -118,8 +118,12 @@ $(function() {
 	spinnerOn = function(){
         console.log($("#mainBox").height())
         $("#spinner").height($("#mainBox").height());
-        // $("#noSpinner").fadeOut("fast");
+        console.log("1A hide no spinner")
+        $("#noSpinner").hide();
+        $("#more-button").hide();
+        console.log("2A and show spinner")
         $("#spinner").fadeIn("fast");
+
 	/*
 	console.log("on")
         $("#noSpinner").fadeOut("fast", function(){
@@ -130,9 +134,13 @@ $(function() {
 	};
 	
 	spinnerOff = function(){
-
+    console.log("1B hide spinner")
 	$("#spinner").fadeOut("fast");
-	//$("#noSpinner").fadeIn("fast");
+	console.log("2B and show no spinner")
+	$("#noSpinner").fadeIn("fast");
+	$("#more-button").fadeIn("fast");
+
+
         /*
 	console.log("off")
         $("#spinner").fadeOut("fast", function(){
@@ -202,7 +210,6 @@ $(function() {
 								class : "detail"
 							}))
 							.append(buttons(item.id))
-//							.append(button("yes-" + item.id, "rateBoxElem", "ok"))
 							.appendTo('#' + item.id);
 							
 							detailModal(item).appendTo('#' + item.id);
@@ -249,8 +256,10 @@ $(function() {
 					console.log("errores");
 					console.log(err);
 				}).always(function(){
-					spinnerOff();
+
 				});
+				console.log("done. spinner off")
+				spinnerOff();
 	};
 
 	$.priceRange = function() {
