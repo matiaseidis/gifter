@@ -23,29 +23,24 @@
 
 </head>
 <body>
-<nav class="navbar navbar-default navbar-static-top" role="navigation">
-  <div class="container">
-    <ul class="nav navbar-nav">
+	<nav class="navbar navbar-default navbar-static-top" role="navigation">
+		<div class="container">
+			<ul class="nav navbar-nav">
 
-                <li class="active"><a href="#"><span class="glyphicon glyphicon-refresh"></span>Empezar de nuevo</a></li>
+				<li class="active"><a href="#"><span
+						class="glyphicon glyphicon-refresh"></span>Empezar de nuevo</a></li>
 
-                <li>
-
-
-
-                    </li>
-                <li>
-
-                 <div id="selectedItemsButtonBox">
-                            <a href="#" title="recomendaciones seleccionadas" class="btn btn-lg" type="button" id="selectedItemsButton">
-                                            <span class="glyphicon glyphicon-gift"></span>
-                                            </a>
-
-                </li>
-              </ul>
-
-  </div>
-</nav>
+				<li>
+					<div id="selectedItemsButtonBox">
+						<a href="#" title="recomendaciones seleccionadas"
+							class="btn btn-lg" type="button" id="selectedItemsButton"> <span
+							class="glyphicon glyphicon-gift"></span>
+						</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
 
 	<div class="container">
 
@@ -79,28 +74,29 @@
                  <div id="priceSliderTooltipTo"></div>
                 </div>
             </div>
+            
+            
 
-            <div id="spinner" class="col-md-10">
-            		<!-- <h1>Gifter</h1> -->
-            		<div id="spinner-inner">
-            			<img id="thinking" src="images/thinking.jpg" />
-            		</div>
-            	</div>
-
-            <div id="noSpinner" class="col-md-10 flip-container">
+            <div id="flip-container" class="col-md-10 flip-container" ontouchstart="this.classList.toggle('flip');">
                 <div class="flipper">
-                    <div class="row recommendations front" id="recommendations"></div>
+                    <div class="front row recommendations" id="recommendations"></div>
                     <div id="selectedItemsBox" class="back">
                         <p>Recomendaciones seleccionadas:</p>
                         <div class="selectedItemsLine row"></div>
                     </div>
+                    
+                    <div id="spinner" class="back col-md-10">
+		            	<div id="spinner-inner">
+		            		<img id="thinking" src="images/thinking.jpg" />
+		            	</div>
+		            </div>
 
                 </div>
             </div>
 
 
 
-            <div class="col-md-1">
+            <div class="col-md-1 noSpinner">
                 <div class="arrow_box">
                     <span class="glyphicon glyphicon-chevron-right" id="more-button"></span>
                 </div>
@@ -109,7 +105,7 @@
         </div>
 
         <div id="lowerBox" class="row">
-        <p><h6>Made by us</h6></p>
+        <h6>Made by us</h6>
         </div>
 
 
@@ -117,10 +113,10 @@
 
 <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="js/modal.js"></script>
 <script type="text/javascript" src="js/carousel.js"></script>
 <script type="text/javascript" src="js/jquery.nouislider.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
 <!--<script type="text/javascript" src="js/jquery.flip.min.js"></script>-->
 
 </body>

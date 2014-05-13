@@ -38,6 +38,7 @@ public class Gifter {
 	ServletContext context;
 
     boolean mocked = true;
+    long mockReqDelayMs = 10000;
 
 	@POST
 	@Path("/recommendation")
@@ -51,7 +52,7 @@ public class Gifter {
             BufferedReader br = new BufferedReader(new FileReader(new File(this.getClass().getResource("/mockedResponse.json").toURI())));
             JSONArray mockedResponse = new JSONArray(br.readLine());
             br.close();
-            new CountDownLatch(1).await(500, TimeUnit.MILLISECONDS);
+            new CountDownLatch(1).await(mockReqDelayMs, TimeUnit.MILLISECONDS);
             return Response.status(200).entity(mockedResponse).build();
         } catch (Exception e) {
             log.error("failed to build mocked response", e);

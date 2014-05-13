@@ -6,8 +6,9 @@ $(function() {
 	// filters = ["baby", "girl", "female", "boy", "male"];
 	url = "/service/gifter/recommendation";
 	selectedItemsInitialLeft = $("#selectedItemsBox").css('left');
-	priceRange = {}
-
+	priceRange = {};
+	toggleClassName = "hidden";
+	
     var customToolTip = function(c) {
         return $.Link({
             target: '-tooltip-<div class="tooltip"></div>',
@@ -21,7 +22,7 @@ $(function() {
                 );
             }
         });
-    }
+    };
 
     priceSliderStep = 20;
     $("#pricesSlider").noUiSlider({
@@ -42,62 +43,6 @@ $(function() {
         		upper: [ customToolTip("Hasta") ]
         	}
     });
-	/*
-	$(".filter").on("click", function(e){
-
-		var elem = $( e.delegateTarget )
-		var filter = $.trim(elem.attr("value"));
-		if(elem.hasClass("btn-success")) {
-			// disable
-			elem.removeClass("btn-success");
-			elem.addClass("btn-disabled");
-			elem.children("span").removeClass("glyphicon-thumbs-up");
-			elem.children("span").addClass("glyphicon-thumbs-down");
-			
-			filters.splice(filters.indexOf(filter), 1);
-			
-		} else {
-			// enable
-			elem.removeClass("btn-disabled");
-			elem.addClass("btn-success");
-			elem.children("span").removeClass("glyphicon-thumbs-down");
-			elem.children("span").addClass("glyphicon-thumbs-up");
-			
-			filters.push(filter);
-			
-		}
-
-		
-		elem.blur();
-	});
-	*/
-
-	/*
-	zoom = function(image){
-		console.log("zoom for " + image);
-		var a = $("<a />", {
-			"href": image,
-			"target": "_blank",
-			class: "zoom ch-shownby-pointerenter ch-zoom-trigger",
-			"aria-owns":"ch-zoom-33",
-			"aria-haspopup":"true",
-			"data-side":"right",
-			"data-align":"top",
-			"style":"width: 128px; height: 128px;"
-		});
-		var i = $("<img />", {
-			src: image
-		});
-		var seeker = $("<div />", {
-			class:"ch-zoom-seeker ch-hide",
-			style:"width: 75px; height: 75px; left: 30.5px; top: 0px;"
-		});
-		i.appendTo(a);
-		seeker.appendTo(a);
-		new ch.Zoom(a);
-		return a;
-	};
-	*/
 
 	breadcrumb = function(title, elem) {
 		var splitted = title.split(">");
@@ -116,38 +61,27 @@ $(function() {
 	};
 	
 	spinnerOn = function(){
-        console.log($("#mainBox").height())
-        $("#spinner").height($("#mainBox").height());
-        console.log("1A hide no spinner")
-        $("#noSpinner").hide();
-        $("#more-button").hide();
-        console.log("2A and show spinner")
-        $("#spinner").fadeIn("fast");
-
-	/*
-	console.log("on")
-        $("#noSpinner").fadeOut("fast", function(){
-        console.log("callback on")
-            $("#spinner").fadeIn("fast");
-     	});
-     	*/
+		console.log("show spinner")
+		$("#spinner").removeClass(toggleClassName);
+//		show();
+		$("#recommendations").addClass(toggleClassName);
+//		hide();
 	};
 	
+//	toggleSpinner = function() {
+//		console.log(11)
+//		
+//		console.log(12)
+//	};
+//	
 	spinnerOff = function(){
-    console.log("1B hide spinner")
-	$("#spinner").fadeOut("fast");
-	console.log("2B and show no spinner")
-	$("#noSpinner").fadeIn("fast");
-	$("#more-button").fadeIn("fast");
-
-
-        /*
-	console.log("off")
-        $("#spinner").fadeOut("fast", function(){
-        console.log("callback off")
-            $("#noSpinner").fadeIn("fast");
-        });
-        */
+		console.log("hide spinner")
+		$("#recommendations").removeClass(toggleClassName);
+//		.show();
+		$("#spinner").addClass(toggleClassName);
+//		hide();
+//		$("#recommendations").toggleClass(toggleClassName);
+//		$("#spinner").toggleClass(toggleClassName);
 	};
 
 	$.selectedItem = function(id) {
@@ -161,121 +95,6 @@ $(function() {
    	$.selectedItemElemId = function(id) {
    	    return "selected-item-" + id;
    	};
-
-	
-	start = function(r) {
-	    var mainBox = $("#recommendations")
-        mainBox.empty();
-		spinnerOn();
-		toRate = [];
-		modalRendered = [];
-		$.ajax(
-				{
-					type : "POST",
-					url : url,
-					data : r,
-					contentType : "application/json",
-					success : function(data, textStatus, jqXHR) {
-
-
-
-						message = data;
-						$.each(data, function(index, item) {
-							var title = item.name;
-							var image = item.imageURL;
-
-							if(item.items.length == 0) {
-							    console.log("ML unreachable...");
-							    return;
-							}
-
-							if (item.items[0].images[0]) {
-								image = item.items[0].images[0];
-							}
-							toRate.push(index);
-							var box = $('<div/>', {
-								id : item.id,
-								// class: "col-xs-6 col-sm-4"
-								class : "item-box col-md-4"
-							});
-							if(index == 1) {
-								box.addClass("center");
-							}
-							mainBox.append(box);
-
-							$('<div/>', {class: "item-title-box"})
-							.append($('<a />', {
-								href : item.items[0].externalURL,
-								text : item.items[0].title,
-								class : "detail"
-							}))
-							.append(buttons(item.id))
-							.appendTo('#' + item.id);
-							
-							detailModal(item).appendTo('#' + item.id);
-
-							var okButton = $("<div />", {
-							    class: "okButton white okButtonElem",
-							    id: "yes-"+item.id,
-							    href:"#"
-                            });
-							okButton.append($("<span />", {
-                                class: "glyphicon glyphicon-ok-circle okButtonElem"
-							}));
-
-							$('<div/>', {class: "item-main-image-box"})
-							.append(okButton)
-							.append($('<img/>', {
-								src : image,
-								alt : title
-							}))
-							.appendTo('#' + item.id)
-							.on("click", function(e) { turnOnModal(e, item, index);});
-							
-							$('<div/>', { class : "rateBox" }).appendTo('#' + item.id);
-
-							var itemCategoryBox = $('<div/>', {class: "item-category-box"});
-							breadcrumb(title, itemCategoryBox);
-							itemCategoryBox.appendTo('#' + item.id);
-							
-							$("#yes-" + item.id).on("click", function(e) {
-								e.preventDefault();
-								updateRate(e, item, index, true, true);
-							});
-
-							$("#already-have-"+ item.id).on("click", function(e) {
-                                e.preventDefault();
-                                updateRate(e, item, index, true, false);
-                            });
-							
-							$('#' + item.id + " a.detail").on("click", function(e) { turnOnModal(e, item, index);});
-						});
-					},
-					dataType : "json"
-				}).fail(function(err) {
-					console.log("errores");
-					console.log(err);
-				}).always(function(){
-
-				});
-				console.log("done. spinner off")
-				spinnerOff();
-	};
-
-	$.priceRange = function() {
-
-	    return {
-	    "from": $("#pricesSlider").val()[0],
-	    "to": $("#pricesSlider").val()[1]
-	    }
-	}
-
-	start(JSON.stringify({
-		scores : [],
-		priceRange: $.priceRange()
-		// ,
-		// filters : filters
-	}));
 
 	updateRate = function(event, item, index, score, like) {
 
@@ -397,16 +216,6 @@ $(function() {
 		return b;
 	};
 	
-	$("#more-button").on("click", function(){
-		start(JSON.stringify({
-			scores : message,
-			priceRange: $.priceRange()
-			/* ,
-			filters : filters
-			*/
-		}));
-	});
-
 	$("#selectedItemsButton").on("click", function(e){
 
 	 // document.querySelector(".flip-container").classList.toggle("flip");
@@ -422,30 +231,143 @@ $(function() {
             console.log("visible");
             toHide = recommendationsBox;
             toShow = selectedItemsBox;
-            /*
-            $("#selectedItemsBox").slideUp(function() {
-                $("#selectedItemsBox").hide();
-            });
-            */
-            /*
-            $("#selectedItemsBox").slideDown();
-            */
         }
 
 
         $(toHide).fadeOut(mode, function(){
+        	console.log("epa")
             $(toShow).fadeIn(mode);
         });
-
-        /*
-        $(toHide).flip({
-        	direction:'tb'
-        })
-        */
-
-
-
-
 	});
+	
+	var w = $("#flip-container").width();
+	var h = $("#pricesSlider").height();
+	
+	console.log("w: " + w +" h: " + h);
+	
+	$(".flip-container").css("width", w);
+	$(".flip-container").css("height", h);
+	$(".front").css("width", w);
+	$(".front").css("height", h);
+	$(".back").css("width", w);
+	$(".back").css("height", h);
+	
+	
+	start = function(r) {
+		spinnerOn();
+		var mainBox = $("#recommendations");
+		mainBox.empty();
+		toRate = [];
+		modalRendered = [];
+		$.ajax(
+				{
+					type : "POST",
+					url : url,
+					async: false,
+					data : r,
+					contentType : "application/json",
+					success : function(data, textStatus, jqXHR) {
+
+
+
+						message = data;
+						$.each(data, function(index, item) {
+							var title = item.name;
+							var image = item.imageURL;
+
+							if(item.items.length == 0) {
+							    console.log("ML unreachable...");
+							    return;
+							}
+
+							if (item.items[0].images[0]) {
+								image = item.items[0].images[0];
+							}
+							toRate.push(index);
+							var box = $('<div/>', {
+								id : item.id,
+								class : "item-box col-md-4"
+							});
+							if(index == 1) {
+								box.addClass("center");
+							}
+							mainBox.append(box);
+
+							$('<div/>', {class: "item-title-box"})
+							.append($('<a />', {
+								href : item.items[0].externalURL,
+								text : item.items[0].title,
+								class : "detail"
+							}))
+							.append(buttons(item.id))
+							.appendTo('#' + item.id);
+							
+							detailModal(item).appendTo('#' + item.id);
+
+							var okButton = $("<div />", {
+							    class: "okButton white okButtonElem",
+							    id: "yes-"+item.id,
+							    href:"#"
+                            });
+							okButton.append($("<span />", {
+                                class: "glyphicon glyphicon-ok-circle okButtonElem"
+							}));
+
+							$('<div/>', {class: "item-main-image-box"})
+							.append(okButton)
+							.append($('<img/>', {
+								src : image,
+								alt : title
+							}))
+							.appendTo('#' + item.id)
+							.on("click", function(e) { turnOnModal(e, item, index);});
+							
+							$('<div/>', { class : "rateBox" }).appendTo('#' + item.id);
+
+							var itemCategoryBox = $('<div/>', {class: "item-category-box"});
+							breadcrumb(title, itemCategoryBox);
+							itemCategoryBox.appendTo('#' + item.id);
+							
+							$("#yes-" + item.id).on("click", function(e) {
+								e.preventDefault();
+								updateRate(e, item, index, true, true);
+							});
+
+							$("#already-have-"+ item.id).on("click", function(e) {
+                                e.preventDefault();
+                                updateRate(e, item, index, true, false);
+                            });
+							
+							$('#' + item.id + " a.detail").on("click", function(e) { turnOnModal(e, item, index);});
+						});
+					},
+					dataType : "json"
+				}).fail(function(err) {
+					console.log("errores");
+					console.log(err);
+				}).always(function(){
+					spinnerOff();
+				});
+	};
+	
+	$("#more-button").on("click", function(){
+		start(JSON.stringify({
+			scores : message,
+			priceRange: $.priceRange()
+		}));
+	});
+	
+	$.priceRange = function() {
+		var state = $("#pricesSlider").val();
+	    return {
+	    "from": state[0],
+	    "to": state[1]
+	    };
+	};
+	
+	start(JSON.stringify({
+		scores : [],
+		priceRange: $.priceRange()
+	}));
 
 });
