@@ -263,7 +263,7 @@ $(function() {
 				{
 					type : "POST",
 					url : url,
-					async: false,
+//					async: false,
 					data : r,
 					contentType : "application/json",
 					success : function(data, textStatus, jqXHR) {

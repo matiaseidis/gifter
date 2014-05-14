@@ -77,15 +77,32 @@
             
             
 
-            <div id="flip-container" class="col-md-10 flip-container" ontouchstart="this.classList.toggle('flip');">
-                <div class="flipper">
-                    <div class="front row recommendations" id="recommendations"></div>
-                    <div id="selectedItemsBox" class="back">
+<!--             <div id="flip-container" class="col-md-10 flip-container" ontouchstart="this.classList.toggle('flip');"> -->
+<!--                 <div class="flipper"> -->
+<!--                     <div class="front row recommendations" id="recommendations"></div> -->
+<!--                     <div id="selectedItemsBox" class="back"> -->
+<!--                         <p>Recomendaciones seleccionadas:</p> -->
+<!--                         <div class="selectedItemsLine row"></div> -->
+<!--                     </div> -->
+                    
+<!--                     <div id="spinner" class="back col-md-10"> -->
+<!-- 		            	<div id="spinner-inner"> -->
+<!-- 		            		<img id="thinking" src="images/thinking.jpg" /> -->
+<!-- 		            	</div> -->
+<!-- 		            </div> -->
+
+<!--                 </div> -->
+<!--             </div> -->
+
+			<div class="col-md-10" >
+                <div >
+                    <div class="row recommendations" id="recommendations"></div>
+                    <div id="selectedItemsBox" >
                         <p>Recomendaciones seleccionadas:</p>
                         <div class="selectedItemsLine row"></div>
                     </div>
                     
-                    <div id="spinner" class="back col-md-10">
+                    <div id="spinner" class="col-md-10">
 		            	<div id="spinner-inner">
 		            		<img id="thinking" src="images/thinking.jpg" />
 		            	</div>
@@ -95,8 +112,7 @@
             </div>
 
 
-
-            <div class="col-md-1 noSpinner">
+            <div class="col-md-1">
                 <div class="arrow_box">
                     <span class="glyphicon glyphicon-chevron-right" id="more-button"></span>
                 </div>
